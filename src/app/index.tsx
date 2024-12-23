@@ -1,23 +1,22 @@
 'use client';
 
-import type { PropsWithChildren, ReactNode } from 'react';
 import {
-  TransactionsToastList,
-  NotificationModal,
-  SignTransactionsModals,
-  DappProvider
+  DappProvider,
   // uncomment this to use the custom transaction tracker
   // TransactionsTracker
+  NotificationModal,
+  SignTransactionsModals,
+  TransactionsToastList
 } from '@/components';
 import {
   apiTimeout,
-  walletConnectV2ProjectId,
   environment,
-  sampleAuthenticatedDomains
+  sampleAuthenticatedDomains,
+  walletConnectV2ProjectId
 } from '@/config';
-import { BatchTransactionsContextProvider } from '@/wrappers';
-import { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
 import { RouteNamesEnum } from '@/localConstants';
+import { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 const AppContent = ({ children }: PropsWithChildren) => {
   return (
@@ -31,7 +30,7 @@ const AppContent = ({ children }: PropsWithChildren) => {
       dappConfig={{
         isSSR: true,
         shouldUseWebViewProvider: true,
-        logoutRoute: RouteNamesEnum.unlock
+        logoutRoute: RouteNamesEnum.home
       }}
       customComponents={{
         transactionTracker: {
@@ -64,9 +63,7 @@ export default function App({ children }: { children: ReactNode }) {
       <AxiosInterceptorContext.Interceptor
         authenticatedDomains={sampleAuthenticatedDomains}
       >
-        <BatchTransactionsContextProvider>
-          <AppContent>{children}</AppContent>
-        </BatchTransactionsContextProvider>
+        <AppContent>{children}</AppContent>
       </AxiosInterceptorContext.Interceptor>
     </AxiosInterceptorContext.Provider>
   );

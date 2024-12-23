@@ -2,6 +2,14 @@
 const nextConfig = {
   distDir: 'build',
   transpilePackages: ['@multiversx/sdk-dapp'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cache.tonapi.io'
+      }
+    ]
+  },
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
     config.externals.push('pino-pretty', 'lokijs', 'encoding', {

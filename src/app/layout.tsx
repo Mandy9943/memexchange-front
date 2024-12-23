@@ -1,9 +1,9 @@
-import '../styles/globals.css';
-import { Suspense } from 'react';
-import type { ReactNode } from 'react';
+import { Layout } from '@/components/Layout';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Layout } from '@/components/Layout';
+import type { ReactNode } from 'react';
+import { Suspense } from 'react';
+import '../styles/globals.css';
 import App from './index';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className={inter.className}>
-      <body>
+      <body className={`${inter.className} bg-neutral-900 text-white`}>
         <App>
           <Suspense>
             <Layout>{children}</Layout>
