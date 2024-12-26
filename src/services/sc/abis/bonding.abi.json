@@ -1,0 +1,623 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.82.0",
+            "commitHash": "f6e511eec7342f59a25f7c0534f1dbea00d01b14",
+            "commitDate": "2024-10-15",
+            "channel": "Stable",
+            "short": "rustc 1.82.0 (f6e511eec 2024-10-15)"
+        },
+        "contractCrate": {
+            "name": "bonding",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.54.6"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "Bonding",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "allowed_token",
+                "type": "TokenIdentifier"
+            },
+            {
+                "name": "initial_virtual_liquidity",
+                "type": "BigUint"
+            },
+            {
+                "name": "max_market_cap",
+                "type": "BigUint"
+            },
+            {
+                "name": "issue_token_cost",
+                "type": "BigUint"
+            },
+            {
+                "name": "reach_dex_fee",
+                "type": "BigUint"
+            },
+            {
+                "name": "fees_collector",
+                "type": "Address"
+            },
+            {
+                "name": "oracle_address",
+                "type": "Address"
+            },
+            {
+                "name": "wegld_unwrap_sc",
+                "type": "Address"
+            },
+            {
+                "name": "router_sc_address",
+                "type": "Address"
+            },
+            {
+                "name": "lock_lp_address",
+                "type": "Address"
+            }
+        ],
+        "outputs": []
+    },
+    "upgradeConstructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "setTokenIdentifier",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "creator_buy_token",
+                    "type": "bool"
+                },
+                {
+                    "name": "token_creator",
+                    "type": "Address"
+                },
+                {
+                    "name": "token_display_name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_description",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_image_url",
+                    "type": "bytes"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "enableSwap",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "configXexchange",
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "pause",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "resume",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "getState",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "State"
+                }
+            ]
+        },
+        {
+            "name": "setStateActiveNoSwaps",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "changeFeesCollectorAddress",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "new_value",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getFeesCollectorAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setFeePercents",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "total_fee_percent",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getOwnerFeePercent",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getFirstTokenId",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        {
+            "name": "getSecondTokenId",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        {
+            "name": "getRouterScAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setRouterScAddress",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getMaxMarketCap",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getOwner",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getReserve",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getMarketCap",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getBondingData",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "PairData"
+                }
+            ]
+        },
+        {
+            "name": "getPairAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getLockLpAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getIsFirstTokenBuyByCreator",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "getDisplayName",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes"
+                }
+            ]
+        },
+        {
+            "name": "getDescription",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes"
+                }
+            ]
+        },
+        {
+            "name": "getImageUrl",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bytes"
+                }
+            ]
+        },
+        {
+            "name": "initialSwap",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "amount_out_min",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "EsdtTokenPayment"
+                }
+            ]
+        },
+        {
+            "name": "swap",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "amount_out_min",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "EsdtTokenPayment"
+                }
+            ]
+        },
+        {
+            "name": "getAmountOut",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "token_in",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "amount_in",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        }
+    ],
+    "events": [
+        {
+            "identifier": "swap",
+            "inputs": [
+                {
+                    "name": "token_in",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "token_out",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "caller",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "epoch",
+                    "type": "u64",
+                    "indexed": true
+                },
+                {
+                    "name": "swap_event",
+                    "type": "SwapEvent"
+                }
+            ]
+        },
+        {
+            "identifier": "token_created",
+            "inputs": [
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier",
+                    "indexed": true
+                },
+                {
+                    "name": "token_creator",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "data",
+                    "type": "TokenCreatedEvent"
+                }
+            ]
+        },
+        {
+            "identifier": "state_changed",
+            "inputs": [
+                {
+                    "name": "state",
+                    "type": "State"
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": true,
+    "types": {
+        "EsdtTokenPayment": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "token_identifier",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ]
+        },
+        "PairData": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "first_token_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "second_token_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "owner_fee_percent",
+                    "type": "u64"
+                },
+                {
+                    "name": "market_cap",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "state",
+                    "type": "State"
+                }
+            ]
+        },
+        "State": {
+            "type": "enum",
+            "variants": [
+                {
+                    "name": "Inactive",
+                    "discriminant": 0
+                },
+                {
+                    "name": "Active",
+                    "discriminant": 1
+                },
+                {
+                    "name": "PartialActive",
+                    "discriminant": 2
+                },
+                {
+                    "name": "PendingAddLiquidity",
+                    "discriminant": 3
+                },
+                {
+                    "name": "Finished",
+                    "discriminant": 4
+                }
+            ]
+        },
+        "SwapEvent": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "caller",
+                    "type": "Address"
+                },
+                {
+                    "name": "token_id_in",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_amount_in",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "token_id_out",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_amount_out",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "fee_amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "token_in_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "token_out_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "block",
+                    "type": "u64"
+                },
+                {
+                    "name": "epoch",
+                    "type": "u64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "u64"
+                }
+            ]
+        },
+        "TokenCreatedEvent": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_creator",
+                    "type": "Address"
+                },
+                {
+                    "name": "token_display_name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_description",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_image_url",
+                    "type": "bytes"
+                }
+            ]
+        }
+    }
+}

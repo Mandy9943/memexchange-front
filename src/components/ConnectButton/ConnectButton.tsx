@@ -1,46 +1,13 @@
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog';
-import { nativeAuth } from '@/config';
 import { logout } from '@/helpers';
-import { useGetIsLoggedIn } from '@/hooks';
-import { RouteNamesEnum } from '@/localConstants';
-import {
-  useExtensionLogin,
-  useWalletConnectV2Login,
-  useWebWalletLogin
-} from '@multiversx/sdk-dapp/hooks';
+import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
 import { Wallet } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import {
-  DefiWalletIcon,
-  WalletConnectIcon,
-  XPortalIcon
-} from '../Icons/customIcons';
+import { ConnectDialog } from './ConnectDialog';
 
 export const ConnectButton = () => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-
   const isLoggedIn = useGetIsLoggedIn();
-
-  const commonProps = {
-    callbackRoute: RouteNamesEnum.home,
-    nativeAuth,
-    onLoginRedirect: () => {
-      router.push(RouteNamesEnum.home);
-      setOpen(false);
-    }
-  };
-
-  const [extensionLogin] = useExtensionLogin(commonProps);
-  const [webWalletLogin] = useWebWalletLogin(commonProps);
-  const [walletConnectLogin] = useWalletConnectV2Login(commonProps);
+  const [open, setOpen] = useState(false);
 
   const handleDisconnect = () => {
     logout();
@@ -64,43 +31,11 @@ export const ConnectButton = () => {
           <Wallet size={'16px'} /> Connect Wallet
         </Button>
       )}
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className='sm:max-w-md bg-black'>
-          <DialogHeader>
-            <DialogTitle className='text-center '>Connect Wallet</DialogTitle>
-          </DialogHeader>
-
-          <p className='text-center text-gray-400 text-sm'>Available Wallets</p>
-
-          <div className='flex justify-center gap-5 '>
-            <div
-              onClick={() => extensionLogin()}
-              className='cursor-pointer flex flex-col items-center gap-2'
-            >
-              <DefiWalletIcon height={25} />
-
-              <p className='text-sm'> Defi Wallet</p>
-            </div>
-            <div
-              onClick={() => webWalletLogin()}
-              className='cursor-pointer flex flex-col items-center gap-2'
-            >
-              <WalletConnectIcon height={25} />
-
-              <p className='text-sm'> Wallet Connect</p>
-            </div>
-            <div
-              onClick={() => walletConnectLogin()}
-              className='cursor-pointer flex flex-col items-center gap-2'
-            >
-              <XPortalIcon height={25} />
-
-              <p className='text-sm'> xPortal App</p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ConnectDialog
+        open={open}
+        onOpenChange={setOpen}
+        onLoginRedirect={() => setOpen(false)}
+      />
     </>
   );
 };

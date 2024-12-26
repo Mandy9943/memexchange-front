@@ -15,8 +15,10 @@ import {
   walletConnectV2ProjectId
 } from '@/config';
 import { RouteNamesEnum } from '@/localConstants';
+import store from '@/redux/store';
 import { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
 import type { PropsWithChildren, ReactNode } from 'react';
+import { Provider } from 'react-redux';
 
 const AppContent = ({ children }: PropsWithChildren) => {
   return (
@@ -59,12 +61,14 @@ const AppContent = ({ children }: PropsWithChildren) => {
 
 export default function App({ children }: { children: ReactNode }) {
   return (
-    <AxiosInterceptorContext.Provider>
-      <AxiosInterceptorContext.Interceptor
-        authenticatedDomains={sampleAuthenticatedDomains}
-      >
-        <AppContent>{children}</AppContent>
-      </AxiosInterceptorContext.Interceptor>
-    </AxiosInterceptorContext.Provider>
+    <Provider store={store}>
+      <AxiosInterceptorContext.Provider>
+        <AxiosInterceptorContext.Interceptor
+          authenticatedDomains={sampleAuthenticatedDomains}
+        >
+          <AppContent>{children}</AppContent>
+        </AxiosInterceptorContext.Interceptor>
+      </AxiosInterceptorContext.Provider>
+    </Provider>
   );
 }

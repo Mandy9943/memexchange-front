@@ -1,0 +1,90 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog';
+import { nativeAuth } from '@/config';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { RouteNamesEnum } from '@/localConstants';
+import { setShard, setUserAddress } from '@/redux/dapp/dapp-slice';
+import {
+  useExtensionLogin,
+  useGetAccountInfo,
+  useWalletConnectV2Login,
+  useWebWalletLogin
+} from '@multiversx/sdk-dapp/hooks';
+import { useEffect } from 'react';
+import {
+  DefiWalletIcon,
+  WalletConnectIcon,
+  XPortalIcon
+} from '../Icons/customIcons';
+
+interface ConnectDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onLoginRedirect?: () => void;
+}
+
+export const ConnectDialog = ({
+  open,
+  onOpenChange,
+  onLoginRedirect
+}: ConnectDialogProps) => {
+  const dispatch = useAppDispatch();
+
+  const commonProps = {
+    callbackRoute: RouteNamesEnum.home,
+    nativeAuth,
+    onLoginRedirect: onLoginRedirect
+  };
+
+  const [extensionLogin] = useExtensionLogin(commonProps);
+  const [webWalletLogin] = useWebWalletLogin(commonProps);
+  const [walletConnectLogin] = useWalletConnectV2Login(commonProps);
+
+  const { address, shard } = useGetAccountInfo();
+  useEffect(() => {
+    dispatch(
+      setUserAddress(process.env.NEXT_PUBLIC_CONNECTED_ADDRESS || address)
+    );
+    dispatch(setShard(shard || 1));
+  }, [address, dispatch, shard]);
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className='sm:max-w-md bg-black'>
+        <DialogHeader>
+          <DialogTitle className='text-center'>Connect Wallet</DialogTitle>
+        </DialogHeader>
+
+        <p className='text-center text-gray-400 text-sm'>Available Wallets</p>
+
+        <div className='flex justify-center gap-5'>
+          <div
+            onClick={() => extensionLogin()}
+            className='cursor-pointer flex flex-col items-center gap-2'
+          >
+            <DefiWalletIcon height={25} />
+            <p className='text-sm'> Defi Wallet</p>
+          </div>
+          <div
+            onClick={() => webWalletLogin()}
+            className='cursor-pointer flex flex-col items-center gap-2'
+          >
+            <WalletConnectIcon height={25} />
+            <p className='text-sm'> Wallet Connect</p>
+          </div>
+          <div
+            onClick={() => walletConnectLogin()}
+            className='cursor-pointer flex flex-col items-center gap-2'
+          >
+            <XPortalIcon height={25} />
+            <p className='text-sm'> xPortal App</p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};

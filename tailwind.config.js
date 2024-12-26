@@ -58,10 +58,19 @@ module.exports = {
         '50%': { transform: 'translateX(5px)' },
         '70%': { transform: 'translateY(-2px)' },
         '90%': { transform: 'translateY(2px)' }
+      },
+      spin: {
+        from: {
+          transform: 'rotate(0deg)'
+        },
+        to: {
+          transform: 'rotate(360deg)'
+        }
       }
     },
     animation: {
-      shake: 'shake 1s ease-in-out infinite'
+      shake: 'shake 1s ease-in-out infinite',
+      spin: 'spin 1s linear infinite'
     }
   },
   plugins: [require('tailwindcss-animate')]

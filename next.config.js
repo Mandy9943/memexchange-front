@@ -7,6 +7,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cache.tonapi.io'
+      },
+      {
+        protocol: 'https',
+        hostname: 'utfs.io'
       }
     ]
   },

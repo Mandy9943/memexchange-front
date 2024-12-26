@@ -1,3 +1,4 @@
+'use client';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { RouteNamesEnum } from '@/localConstants';
@@ -42,6 +43,15 @@ const page = () => {
 export default page;
 
 function MemeCoins() {
+  // useEffect(() => {
+  //   scQuery('master', 'getAllBondingMetadata').then((res) => {
+  //     console.log(
+  //       res?.firstValue
+  //         ?.valueOf()
+  //         .map((item) => ({ ...item, address: item.address.bech32() }))
+  //     );
+  //   });
+  // }, []);
   return (
     <div className=''>
       <div className='flex items-center mb-4'>

@@ -1,0 +1,430 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.82.0",
+            "commitHash": "f6e511eec7342f59a25f7c0534f1dbea00d01b14",
+            "commitDate": "2024-10-15",
+            "channel": "Stable",
+            "short": "rustc 1.82.0 (f6e511eec 2024-10-15)"
+        },
+        "contractCrate": {
+            "name": "master",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "multiversx-sc",
+            "version": "0.54.6"
+        }
+    },
+    "docs": [
+        "An empty contract. To be used as a template when starting a new contract from scratch."
+    ],
+    "name": "Master",
+    "constructor": {
+        "inputs": [
+            {
+                "name": "pair_template_address",
+                "type": "Address"
+            },
+            {
+                "name": "token_supply",
+                "type": "BigUint"
+            },
+            {
+                "name": "fees_collector",
+                "type": "Address"
+            },
+            {
+                "name": "new_token_fee",
+                "type": "BigUint"
+            },
+            {
+                "name": "initial_virtual_liquidity",
+                "type": "BigUint"
+            },
+            {
+                "name": "initial_token_to_buy_with",
+                "type": "TokenIdentifier"
+            },
+            {
+                "name": "max_market_cap",
+                "type": "BigUint"
+            },
+            {
+                "name": "issue_token_cost",
+                "type": "BigUint"
+            },
+            {
+                "name": "reach_exchange_fee",
+                "type": "BigUint"
+            },
+            {
+                "name": "lock_lp_address",
+                "type": "Address"
+            },
+            {
+                "name": "router_sc_address",
+                "type": "Address"
+            },
+            {
+                "name": "wegld_unwrap_sc",
+                "type": "Address"
+            },
+            {
+                "name": "oracle_address",
+                "type": "Address"
+            }
+        ],
+        "outputs": []
+    },
+    "upgradeConstructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "createNewToken",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "token_display_name",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_ticker",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_creator_buy",
+                    "type": "bool"
+                },
+                {
+                    "name": "token_description",
+                    "type": "bytes"
+                },
+                {
+                    "name": "token_image_url",
+                    "type": "bytes"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getState",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "name": "getOracleAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setFeesCollector",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "fees_collector",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setIVL",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "virtual_liquidity",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getWeGLDUnwrapSc",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getTokenSupply",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "setTokenSupply",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "token_supply",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getNewTokenFee",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "setNewTokenFee",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "new_token_fee",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setMaxMarketCap",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "max_market_cap",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getBondingTemplateAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setBondingTemplateAddress",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getPairMap",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<multi<PairTokens,Address>>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getAllowedToken",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        {
+            "name": "getRouterScAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getAllBondingMetadata",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<PairContractMetadata>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getAllBondingData",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<PairContractData>",
+                    "multi_result": true
+                }
+            ]
+        }
+    ],
+    "events": [
+        {
+            "identifier": "new_pair_contract",
+            "inputs": [
+                {
+                    "name": "pair_contract_address",
+                    "type": "Address",
+                    "indexed": true
+                },
+                {
+                    "name": "data",
+                    "type": "NewPairContractData"
+                }
+            ]
+        }
+    ],
+    "esdtAttributes": [],
+    "hasCallback": true,
+    "types": {
+        "NewPairContractData": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "pair_contract_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        "PairContractData": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "sc_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "first_token_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "second_token_reserve",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "owner_fee_percent",
+                    "type": "u64"
+                },
+                {
+                    "name": "market_cap",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "state",
+                    "type": "State"
+                }
+            ]
+        },
+        "PairContractMetadata": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ]
+        },
+        "PairTokens": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "second_token_id",
+                    "type": "TokenIdentifier"
+                }
+            ]
+        },
+        "State": {
+            "type": "enum",
+            "variants": [
+                {
+                    "name": "Inactive",
+                    "discriminant": 0
+                },
+                {
+                    "name": "Active",
+                    "discriminant": 1
+                },
+                {
+                    "name": "PartialActive",
+                    "discriminant": 2
+                },
+                {
+                    "name": "PendingAddLiquidity",
+                    "discriminant": 3
+                },
+                {
+                    "name": "Finished",
+                    "discriminant": 4
+                }
+            ]
+        }
+    }
+}
