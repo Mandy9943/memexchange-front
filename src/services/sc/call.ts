@@ -447,6 +447,8 @@ export class SmartContractInteraction {
       return SmartContractInteraction.sendMultipleTransactions({
         txs: [tx1, tx2]
       });
+    } else {
+      throw new Error('No address found');
     }
   }
 

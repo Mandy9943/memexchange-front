@@ -1,6 +1,10 @@
 import { scAddress } from '@/config';
 import { Address } from '@multiversx/sdk-core/out';
+import bondingAbi from './abis/bonding.abi.json';
 import masterAbi from './abis/master.abi.json';
+
+export { bondingAbi };
+
 export const smartContractsConfig = {
   wrapEGLDShard0: {
     simpleAddress: scAddress.wrapEGLDShard0,

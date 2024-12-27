@@ -1,7 +1,7 @@
 import { tokensID } from '@/config';
-import { bondingContractAbi } from '@/localConstants/globals';
 import { BigUIntValue, TokenIdentifierValue } from '@multiversx/sdk-core/out';
 import { SendTransactionReturnType } from '@multiversx/sdk-dapp/types';
+import { bondingAbi } from '..';
 import { SmartContractInteraction } from '../call';
 
 export const swap = async ({
@@ -19,10 +19,7 @@ export const swap = async ({
   amountIn: string;
   initialSwap?: boolean;
 }): Promise<SendTransactionReturnType> => {
-  const interaction = new SmartContractInteraction(
-    contract,
-    bondingContractAbi
-  );
+  const interaction = new SmartContractInteraction(contract, bondingAbi);
 
   const args = [
     new TokenIdentifierValue(tokenOut),
@@ -50,4 +47,20 @@ export const swap = async ({
       gasL: initialSwap ? 30_000_000 : 400_000_000
     });
   }
+};
+
+export const issueLpToken = async ({ contract }: { contract: string }) => {
+  const interaction = new SmartContractInteraction(contract, bondingAbi);
+  return interaction.scCall({
+    functionName: 'enableSwap',
+    gasL: 160_000_000
+  });
+};
+
+export const setLocalRoles = async ({ contract }: { contract: string }) => {
+  const interaction = new SmartContractInteraction(contract, bondingAbi);
+  return interaction.scCall({
+    functionName: 'configXexchange',
+    gasL: 100_000_000
+  });
 };
