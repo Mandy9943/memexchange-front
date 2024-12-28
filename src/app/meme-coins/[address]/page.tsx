@@ -11,7 +11,7 @@ import BondingCurveProgress from '../components/MemeCoins/components/BondingCurv
 import MarketCap from '../components/MemeCoins/components/MarketCap';
 import HoldersList from './components/HoldersList/HoldersList';
 import LoadingSkeleton from './components/LoadingEffect';
-import { Trading } from './components/Trading/Trading';
+import { Trading } from './components/Trading';
 import { TradingChart } from './components/TradingChart';
 
 const CoinPage = () => {

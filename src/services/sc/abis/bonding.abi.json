@@ -549,6 +549,10 @@
             "type": "struct",
             "fields": [
                 {
+                    "name": "first_token_id",
+                    "type": "TokenIdentifier"
+                },
+                {
                     "name": "caller",
                     "type": "Address"
                 },
