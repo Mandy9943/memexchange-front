@@ -1,6 +1,6 @@
-import { bondingContractAbi } from '@/localConstants/globals';
 import { BigUIntValue, TokenIdentifierValue } from '@multiversx/sdk-core/out';
 import BigNumber from 'bignumber.js';
+import { bondingAbi } from '..';
 import { scQueryWithContract } from '../query';
 
 // queries
@@ -13,15 +13,16 @@ export const fetchAmountOut = async ({
   tokenIn: string;
   amountIn: string;
 }) => {
-  const res = await scQueryWithContract(
-    address,
-    bondingContractAbi,
-    'getAmountOut',
-    [new TokenIdentifierValue(tokenIn), new BigUIntValue(amountIn)]
-  );
+  const res = await scQueryWithContract(address, bondingAbi, 'getAmountOut', [
+    new TokenIdentifierValue(tokenIn),
+    new BigUIntValue(amountIn)
+  ]);
 
-  const rawData = res.firstValue?.valueOf() as BigNumber[];
+  if (!res?.firstValue) {
+    return '0';
+  }
 
+  const rawData = res.firstValue.valueOf() as BigNumber[];
   const data = rawData.toString();
 
   return data;

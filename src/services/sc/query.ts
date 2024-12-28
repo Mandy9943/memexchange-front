@@ -163,7 +163,7 @@ export const scQueryByFieldsDefinitions = async (
 
 export const scQueryWithContract = async (
   scAddress: string,
-  abi: AbiRegistry,
+  abi: unknown,
   funcName = '',
   args: TypedValue[] = []
 ) => {

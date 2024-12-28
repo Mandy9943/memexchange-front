@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { extractRouterConfig } from 'uploadthing/server';
 import '../styles/globals.css';
 import App from './index';
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <App>
           <Suspense>
             <Layout>{children}</Layout>
+            <Toaster position='top-right' />
           </Suspense>
         </App>
       </body>
