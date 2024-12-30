@@ -1,189 +1,194 @@
-import store from '@/redux/store';
-import { cachedEventsApi } from '@/services/rest/events';
-import { formatTokenI } from '@/utils/mx-utils';
+import {
+  ErrorCallback,
+  HistoryCallback,
+  LibrarySymbolInfo,
+  PeriodParams,
+  ResolutionString,
+  SubscribeBarsCallback
+} from '@/../public/static/charting_library';
+import { fetchAxios } from '@/services/rest/backendApi';
+import { SearchSymbolResultItem } from '../../../../../../public/static/charting_library/charting_library';
 
 const configurationData = {
-  // Represents the resolutions for bars supported by your datafeed
   supported_resolutions: [
     '1',
-    '3',
     '5',
     '15',
     '30',
     '60',
-    '120',
-    '180',
     '240',
-    '1D',
-    '1W',
-    '1M'
-  ],
-  // The `exchanges` arguments are used for the `searchSymbols` method if a user selects the exchange
+    'D'
+  ] as ResolutionString[],
   exchanges: [
     {
-      value: 'Jeetdex',
-      name: 'Jeetdex',
+      value: 'DEX',
+      name: 'DEX',
       desc: 'Simple, fast, secure – and inexpensive order book AMM. Launch a coin in just a few clicks: Get instant branding, real-time charts and chats.'
     }
   ],
-  // The `symbols_types` arguments are used for the `searchSymbols` method if a user selects this symbol type
   symbols_types: [{ name: 'crypto', value: 'crypto' }]
 };
-// DatafeedConfiguration implementation
-// ...
 
-type SymbolRes = {
-  symbol: string;
-  ticker: string;
+type SymbolInfo = {
+  name: string;
   description: string;
-  exchange: 'Jeetdex';
-  type: 'crypto';
-  logo_urls: string[];
+  type: string;
+  session: string;
+  timezone: string;
+  exchange: string;
+  minmov: number;
+  pricescale: number;
+  has_intraday: boolean;
+  supported_resolutions: string[];
+  volume_precision: number;
+  data_status: string;
+  symbol: string;
+  full_name: string;
 };
-// Obtains all symbols for all exchanges supported by CryptoCompare API
-async function getAllSymbols(
-  mode: 'normie' | 'degen' = 'normie'
-): Promise<SymbolRes[]> {
-  const coinsInfo = store.getState().dapp.globalData.coins;
 
-  const res: SymbolRes[] = coinsInfo
-    .filter((coin) =>
-      mode === 'normie'
-        ? !Boolean(coin.degenId)
-        : Boolean(coin.degenId) && coin.identifier.includes('-')
-    )
-    .map((coin) => {
-      const sym: SymbolRes = {
-        symbol: formatTokenI(coin.identifier),
-        ticker: coin.identifier,
-        description: coin.description as string,
-        exchange: 'Jeetdex',
-        type: 'crypto',
-        logo_urls: [coin?.img || '/assets/img/coin-placeholder.svg']
-      };
-      return sym;
-    });
-
-  return res;
-}
-
-const config = (mode: 'normie' | 'degen' = 'normie') => {
+const config = () => {
   return {
-    onReady: (callback) => {
+    onReady: (callback: (config: typeof configurationData) => void) => {
       setTimeout(() => callback(configurationData));
     },
+
     searchSymbols: async (
-      userInput,
-      exchange,
-      symbolType,
-      onResultReadyCallback
+      userInput: string,
+      _exchange: string,
+      _symbolType: string,
+      onResultReadyCallback: (symbols: SearchSymbolResultItem[]) => void
     ) => {
-      const symbols = await getAllSymbols(mode);
-      console.log(symbols);
-
-      const newSymbols = symbols.filter((symbol) => {
-        const isExchangeValid = exchange === '' || symbol.exchange === exchange;
-        const isFullSymbolContainsInput =
-          symbol.ticker.toLowerCase().indexOf(userInput.toLowerCase()) !== -1;
-        return isExchangeValid && isFullSymbolContainsInput;
-      });
-      onResultReadyCallback(
-        newSymbols.map((s) => ({
-          ...s
-        }))
-      );
-    },
-    resolveSymbol: async (symbolName, onSymbolResolvedCallback) => {
-      const symbols = await getAllSymbols(mode);
-      const symbolItem = symbols.find(({ ticker }) => ticker === symbolName);
-      if (!symbolItem) {
-        return;
-      }
-      // Symbol information object
-      const symbolInfo = {
-        ...symbolItem,
-        name: symbolItem.symbol,
-        session: '24x7',
-        timezone: 'Etc/UTC',
-        minmov: 0.1,
-        pricescale: 100,
-        has_intraday: true,
-        intraday_multipliers: ['1'],
-        visible_plots_set: 'ohlc',
-        has_weekly_and_monthly: false,
-        supported_resolutions: configurationData.supported_resolutions,
-        volume_precision: 2,
-        data_status: 'streaming',
-
-        variable_tick_size: '0.000000001'
-      };
-      onSymbolResolvedCallback(symbolInfo);
-    },
-    getBars: async (
-      symbolInfo,
-      resolution,
-      periodParams,
-      onHistoryCallback,
-      onErrorCallback
-    ) => {
-      console.log('getBars');
-
-      const { to } = periodParams;
-
-      const urlParameters = {
-        e: 'JEETDEX',
-        fsym: 'JEET-2346a',
-        tsym: symbolInfo.ticker,
-        // toTs: to,
-        limit: 2000
-      };
-      const query = Object.keys(urlParameters)
-        .map((name) => `${name}=${encodeURIComponent(urlParameters[name])}`)
-        .join('&');
-      console.log({ query });
-
       try {
-        const bars = await cachedEventsApi(`/datafeed/${mode}?${query}`);
-        console.log(bars);
+        const response = await fetchAxios<SymbolInfo[]>(
+          `/chart/search?query=${encodeURIComponent(userInput)}`
+        );
+        console.log(response);
 
-        let currentBars = [];
+        const symbols = response.map((item) => ({
+          ...item,
+          full_name: `${item.symbol}`
+        }));
 
-        bars.forEach((bar) => {
-          if (bar.time < to) {
-            currentBars = [
-              ...currentBars,
-              {
-                time: bar.time * 1000,
-                low: bar.low,
-                high: bar.high,
-                open: bar.open,
-                close: bar.close
-              }
-            ];
-          }
-        });
-        console.log({ currentBars });
-        onHistoryCallback(currentBars, { noData: false });
+        console.log(symbols);
+        onResultReadyCallback(symbols);
       } catch (error) {
-        onErrorCallback(error);
+        console.error('Error searching symbols:', error);
+        onResultReadyCallback([]);
       }
     },
-    subscribeBars: (
-      symbolInfo,
-      resolution,
-      onRealtimeCallback,
-      subscriberUID
+
+    resolveSymbol: async (
+      symbolName: string,
+      onSymbolResolvedCallback: (symbolInfo: LibrarySymbolInfo) => void,
+      onErrorCallback: (error: string) => void
     ) => {
-      console.log(
-        '[subscribeBars]: Method call with subscriberUID:',
-        subscriberUID
-      );
+      try {
+        console.log(symbolName);
+
+        const response = await fetchAxios<SymbolInfo>(
+          `/chart/symbol/${encodeURIComponent(symbolName)}`
+        );
+        console.log(response);
+
+        const symbolInfo: LibrarySymbolInfo = {
+          ...response,
+          name: symbolName,
+          ticker: response.name,
+          session: '24x7',
+          timezone: 'Etc/UTC',
+          minmov: 1,
+          pricescale: 1000000000000,
+          has_intraday: true,
+          has_weekly_and_monthly: false,
+          supported_resolutions: configurationData.supported_resolutions,
+          volume_precision: 2,
+          data_status: 'streaming',
+          listed_exchange: 'DEX',
+          format: 'price'
+        };
+
+        onSymbolResolvedCallback(symbolInfo);
+      } catch (error) {
+        console.error('Error resolving symbol:', error);
+        onErrorCallback('Symbol not found');
+      }
     },
-    unsubscribeBars: (subscriberUID) => {
-      console.log(
-        '[unsubscribeBars]: Method call with subscriberUID:',
-        subscriberUID
-      );
+
+    getBars: async (
+      symbolInfo: LibrarySymbolInfo,
+      resolution: ResolutionString,
+      periodParams: PeriodParams,
+      onHistoryCallback: HistoryCallback,
+      onErrorCallback: ErrorCallback
+    ) => {
+      try {
+        const response = await fetchAxios<{
+          s: string;
+          bars: {
+            time: number;
+            open: number;
+            high: number;
+            low: number;
+            close: number;
+          }[];
+        }>(
+          `/chart/history?symbol=${encodeURIComponent(symbolInfo.name)}` +
+            `&from=${periodParams.from}` +
+            `&to=${periodParams.to}` +
+            `&countBack=${periodParams.countBack}` +
+            `&resolution=${resolution}`
+        );
+
+        if (response.s === 'no_data') {
+          onHistoryCallback([], { noData: true });
+          return;
+        }
+
+        if (response.s !== 'ok' || !Array.isArray(response.bars)) {
+          onErrorCallback('History API error');
+          return;
+        }
+
+        const validBars = response.bars.map((bar) => ({
+          time: Number(bar.time),
+          open: Number(bar.open),
+          high: Number(bar.high),
+          low: Number(bar.low),
+          close: Number(bar.close)
+        }));
+
+        console.log('Processed bars:', validBars);
+
+        onHistoryCallback(validBars, {
+          noData: !validBars.length
+        });
+      } catch (error) {
+        console.error('Error getting bars:', error);
+        onErrorCallback('Error getting bars');
+      }
+    },
+
+    subscribeBars: (
+      symbolInfo: LibrarySymbolInfo,
+      resolution: ResolutionString,
+      onRealtimeCallback: SubscribeBarsCallback,
+      subscriberUID: string,
+      onResetCacheNeededCallback: () => void
+    ) => {
+      console.log('subscribeBars called', {
+        symbolInfo,
+        resolution,
+        subscriberUID,
+        onResetCacheNeededCallback
+      });
+    },
+
+    unsubscribeBars: (_subscriberUID: string) => {
+      // Implement unsubscribe logic here if needed
+      console.log({
+        _subscriberUID
+      });
+      console.log('unsubscribeBars called');
     }
   };
 };

@@ -2,18 +2,20 @@
 
 import dynamic from 'next/dynamic';
 
-const TradingViewWidget = dynamic(() => import('./TradingViewWidget'), {
+const TVChartContainer = dynamic(() => import('./Chart'), {
   ssr: false
 });
 
 interface TradingChartProps {
-  address: string;
+  tokenIdentifier: string;
 }
 
-export const TradingChart: React.FC<TradingChartProps> = ({ address }) => {
+export const TradingChart: React.FC<TradingChartProps> = ({
+  tokenIdentifier
+}) => {
   return (
     <div className='w-full h-[400px]'>
-      <TradingViewWidget symbol={address} />
+      <TVChartContainer tokenIdentifier={tokenIdentifier} />
     </div>
   );
 };
