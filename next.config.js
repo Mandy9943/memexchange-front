@@ -2,6 +2,9 @@
 const nextConfig = {
   distDir: 'build',
   transpilePackages: ['@multiversx/sdk-dapp'],
+  experimental: {
+    serverActions: true
+  },
   images: {
     remotePatterns: [
       {

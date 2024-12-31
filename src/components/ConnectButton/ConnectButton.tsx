@@ -1,3 +1,4 @@
+import { removeSession } from '@/actions/cookies';
 import { Button } from '@/components/ui/button';
 import { logout } from '@/helpers';
 import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
@@ -11,6 +12,7 @@ export const ConnectButton = () => {
 
   const handleDisconnect = () => {
     logout();
+    removeSession();
     setOpen(false);
   };
 

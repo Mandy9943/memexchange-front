@@ -12,15 +12,56 @@ import App from './index';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Template dApp Next.js',
+  title: 'MemExchange | MultiversX Meme Coin Trading Platform',
   description:
-    'A basic implementation of MultiversX dApp providing the basics for MultiversX authentication and TX signing.',
+    'Trade meme coins on MultiversX with MemExchange - the ultimate platform featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration. Buy, sell, and watch your meme coins moon! 🚀',
+  keywords:
+    'memexchange, multiversx, meme coins, cryptocurrency trading, bonding curve, DEX, blockchain, crypto trading platform, liquidity pool, egld, meme tokens',
+  authors: [{ name: 'MemExchange Team' }],
+  creator: 'MemExchange',
+  publisher: 'MemExchange',
+  robots: 'index, follow',
   viewport: {
     width: 'device-width',
     initialScale: 1
   },
   icons: {
-    icon: '/favicon.ico'
+    icon: '/favicon.ico',
+    apple: '/mxc-logo.webp',
+    shortcut: '/mxc-logo.webp'
+  },
+  manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://memexchange.fun',
+    siteName: 'MemExchange',
+    title: 'MemExchange - Trade Meme Coins on MultiversX',
+    description:
+      'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
+    images: [
+      {
+        url: '/og-image.webp',
+        width: 1200,
+        height: 630,
+        alt: 'MemExchange - MultiversX Meme Coin Trading Platform'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@MemExchange',
+    creator: '@MemExchange',
+    title: 'MemExchange - Trade Meme Coins on MultiversX',
+    description:
+      'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
+    images: ['/og-image.webp']
+  },
+  other: {
+    'msapplication-TileColor': '#000000',
+    'theme-color': '#000000',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black'
   }
 };
 

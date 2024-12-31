@@ -1,3 +1,4 @@
+import { createAuthTokenCookie } from '@/actions/cookies';
 import {
   Dialog,
   DialogContent,
@@ -8,13 +9,15 @@ import { nativeAuth } from '@/config';
 import { useAppDispatch } from '@/hooks/useRedux';
 import { RouteNamesEnum } from '@/localConstants';
 import { setShard, setUserAddress } from '@/redux/dapp/dapp-slice';
+import { rewardService } from '@/services/rest/backendApi/reward';
 import {
   useExtensionLogin,
   useGetAccountInfo,
+  useGetLoginInfo,
   useWalletConnectV2Login,
   useWebWalletLogin
 } from '@multiversx/sdk-dapp/hooks';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   DefiWalletIcon,
   WalletConnectIcon,
@@ -40,6 +43,7 @@ export const ConnectDialog = ({
     onLoginRedirect: onLoginRedirect
   };
 
+  const { tokenLogin } = useGetLoginInfo();
   const [extensionLogin] = useExtensionLogin(commonProps);
   const [webWalletLogin] = useWebWalletLogin(commonProps);
   const [walletConnectLogin] = useWalletConnectV2Login(commonProps);
@@ -49,8 +53,25 @@ export const ConnectDialog = ({
     dispatch(
       setUserAddress(process.env.NEXT_PUBLIC_CONNECTED_ADDRESS || address)
     );
+
     dispatch(setShard(shard || 1));
   }, [address, dispatch, shard]);
+
+  useEffect(() => {
+    if (tokenLogin?.nativeAuthToken) {
+      createAuthTokenCookie(tokenLogin.nativeAuthToken);
+    }
+  }, [tokenLogin?.nativeAuthToken]);
+
+  const countRef = useRef(0);
+  useEffect(() => {
+    if (tokenLogin?.nativeAuthToken) {
+      if (countRef.current === 0) {
+        rewardService.completeConnectWallet(tokenLogin.nativeAuthToken);
+        countRef.current++;
+      }
+    }
+  }, [tokenLogin?.nativeAuthToken]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

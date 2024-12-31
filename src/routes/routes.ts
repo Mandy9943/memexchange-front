@@ -1,11 +1,19 @@
 import { RouteNamesEnum } from '@/localConstants';
-import { RouteType } from '@/types';
+import { RouteType } from '@multiversx/sdk-dapp/types';
 import { Coins, Home, PlusCircle } from 'lucide-react';
 
 interface RouteWithTitleType extends Omit<RouteType, 'component'> {
   title: string;
   icon: React.ElementType;
 }
+
+export const adminRoutes: RouteWithTitleType[] = [
+  {
+    path: RouteNamesEnum.adminRewards,
+    title: 'Rewards',
+    icon: PlusCircle
+  }
+];
 
 export const routes: RouteWithTitleType[] = [
   {
