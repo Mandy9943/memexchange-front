@@ -41,11 +41,11 @@ export interface IElrondNFT {
   metadata?: {
     description: string;
     compiler?: string;
-    attributes?: any[];
+    attributes?: unknown[];
   };
   supply?: string;
   ticker: string;
-  rarities?: any;
+  rarities?: unknown;
 
   thumbnailUrl?: string;
   tags?: string[];
@@ -155,7 +155,7 @@ export interface IElrondCollection {
     info: string;
   };
 
-  traits: any;
+  traits: unknown;
 }
 
 export interface IElrondEconomics {
@@ -278,7 +278,7 @@ export interface IElrondUserAccount {
   balance: string;
   nonce: number;
   shard: number;
-  assets?: any;
+  assets?: unknown;
   code?: string;
   codeHash?: string;
   rootHash?: string;
@@ -368,5 +368,5 @@ export interface ITransaction {
 
 export interface ISCResponseQueryType {
   name: string;
-  typeParameters: any[];
+  typeParameters: unknown[];
 }

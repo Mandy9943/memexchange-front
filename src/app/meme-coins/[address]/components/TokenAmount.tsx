@@ -1,5 +1,4 @@
 import { formatTokenI } from '@/utils/mx-utils';
-import BigNumber from 'bignumber.js';
 import { forwardRef, useEffect, useState } from 'react';
 
 interface TokenAmountProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -15,7 +14,6 @@ export const TokenAmount = forwardRef<HTMLInputElement, TokenAmountProps>(
     useEffect(() => {
       if (value) {
         try {
-          const bn = new BigNumber(value);
           setDisplayValue(value);
         } catch (error) {
           console.error('Error formatting value:', error);
