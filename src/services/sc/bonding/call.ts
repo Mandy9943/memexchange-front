@@ -54,7 +54,7 @@ export const swap = async ({
 export const issueLpToken = async ({ contract }: { contract: string }) => {
   const interaction = new SmartContractInteraction(contract, bondingAbi);
   return interaction.scCall({
-    functionName: 'enableSwap',
+    functionName: 'configXexchange',
     gasL: 160_000_000
   });
 };
@@ -62,7 +62,7 @@ export const issueLpToken = async ({ contract }: { contract: string }) => {
 export const setLocalRoles = async ({ contract }: { contract: string }) => {
   const interaction = new SmartContractInteraction(contract, bondingAbi);
   return interaction.scCall({
-    functionName: 'configXexchange',
+    functionName: 'enableSwap',
     gasL: 100_000_000
   });
 };

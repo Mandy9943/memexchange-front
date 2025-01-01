@@ -101,13 +101,13 @@
             "outputs": []
         },
         {
-            "name": "enableSwap",
+            "name": "configXexchange",
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
         },
         {
-            "name": "configXexchange",
+            "name": "enableSwap",
             "mutability": "mutable",
             "inputs": [],
             "outputs": []
@@ -238,6 +238,17 @@
                     "type": "BigUint"
                 }
             ]
+        },
+        {
+            "name": "setMaxMarketCap",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "max_market_cap",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
         },
         {
             "name": "getOwner",
@@ -409,6 +420,15 @@
         }
     ],
     "events": [
+        {
+            "identifier": "state_changed",
+            "inputs": [
+                {
+                    "name": "state",
+                    "type": "State"
+                }
+            ]
+        },
         {
             "identifier": "swap",
             "inputs": [
