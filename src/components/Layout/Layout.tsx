@@ -1,6 +1,5 @@
 'use client';
 import { PropsWithChildren } from 'react';
-import { Footer } from './Footer';
 import { Header } from './Header';
 import { Nav } from './Nav';
 
@@ -14,7 +13,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
       </main>
 
       <Nav />
-      <Footer />
     </div>
   );
 };

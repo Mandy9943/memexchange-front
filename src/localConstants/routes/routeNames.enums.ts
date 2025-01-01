@@ -1,6 +1,8 @@
 export enum RouteNamesEnum {
   home = '/',
-  memeCoins = '/meme-coins',
   createCoin = '/create-coin',
-  adminRewards = '/admin/rewards'
+  memeCoins = '/meme-coins',
+  adminRewards = '/admin/rewards',
+  achievements = '/profile/achievements',
+  tokens = '/profile/tokens'
 }

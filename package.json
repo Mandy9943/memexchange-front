@@ -29,6 +29,7 @@
     "@multiversx/sdk-native-auth-server": "^1.0.20",
     "@multiversx/sdk-network-providers": "^2.9.3",
     "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.4",
     "@radix-ui/react-progress": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@reduxjs/toolkit": "^2.5.0",
