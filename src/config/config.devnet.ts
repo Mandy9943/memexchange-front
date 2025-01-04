@@ -27,7 +27,7 @@ export const scAddress = {
     'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
   wrapEGLDShard2:
     'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
-  degenMaster: 'erd1qqqqqqqqqqqqqpgq8uzj7h484caz32gf0p90jqctufgxcgh6pl6srssu4c'
+  degenMaster: 'erd1qqqqqqqqqqqqqpgq47l73vd49xqaeq3c0s33ctsmga490f7apl6syrwuds'
 };
 
 export const ChainID = 'D';

@@ -11,6 +11,9 @@ const ActionCard = ({ task }: { task: Task }) => {
   const userAddress = useAppSelector(selectUserAddress);
 
   const handleMakeTask = async () => {
+    if (task.title === 'Connect Wallet') {
+      window.location.reload();
+    }
     if (task.type === 'link') {
       window.open(task.linkUrl, '_blank');
       toast.promise(

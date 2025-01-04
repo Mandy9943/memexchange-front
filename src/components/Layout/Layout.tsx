@@ -5,7 +5,7 @@ import { Nav } from './Nav';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col min-h-screen mb-20'>
       <main className='flex flex-grow items-stretch justify-center p-8 flex-1'>
         <Header />
 

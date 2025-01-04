@@ -57,8 +57,13 @@ const CoinPage = () => {
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
           {/* Left column with chart */}
           {bondingPair?.firstToken && (
-            <div className='lg:col-span-2 bg-gray-800 rounded-lg p-4'>
+            <div className='lg:col-span-2 bg-gray-800 rounded-lg p-4 flex flex-col gap-4'>
               <TradingChart tokenIdentifier={bondingPair?.firstToken} />
+
+              <HoldersList
+                tokenIdentifier={scBondingPair.firstTokenId}
+                contractAddress={bondingAddress}
+              />
             </div>
           )}
 
@@ -66,19 +71,21 @@ const CoinPage = () => {
           <div className='space-y-4'>
             {/* Token Info Card */}
             <div className='bg-gray-800 rounded-lg p-4 space-y-4'>
-              <div className='flex items-center gap-4'>
+              <div className='flex flex-col items-center gap-4'>
                 {bondingPair?.coin?.imageUrl && (
-                  <ZoomableImage
-                    src={bondingPair.coin.imageUrl}
-                    alt={bondingPair.coin.name}
-                  />
+                  <div className='w-32 h-32'>
+                    <ZoomableImage
+                      src={bondingPair.coin.imageUrl}
+                      alt={bondingPair.coin.name}
+                    />
+                  </div>
                 )}
-                <div>
+                <div className='text-center'>
                   <h1 className='text-2xl font-bold'>
                     {formatTokenI(scBondingPair.firstTokenId)}
                   </h1>
                   {bondingPair?.coin?.description && (
-                    <p className='text-gray-400 text-sm mt-1'>
+                    <p className='text-gray-400 text-sm mt-2 max-w-md mx-auto'>
                       {bondingPair.coin.description}
                     </p>
                   )}
@@ -102,11 +109,6 @@ const CoinPage = () => {
             <Trading
               firstTokenId={scBondingPair.firstTokenId}
               secondTokenId={scBondingPair.secondTokenId}
-            />
-
-            <HoldersList
-              tokenIdentifier={scBondingPair.firstTokenId}
-              contractAddress={bondingAddress}
             />
           </div>
         </div>

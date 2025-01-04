@@ -30,7 +30,7 @@ export const ZoomableImage = ({ src, alt }: ZoomableImageProps) => {
 
   return (
     <div
-      className='relative w-16 h-16 rounded-full overflow-hidden cursor-pointer transition-transform hover:scale-105'
+      className='relative w-full h-full rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105'
       onClick={toggleZoom}
     >
       <Image src={src} alt={alt} fill className='object-cover' />

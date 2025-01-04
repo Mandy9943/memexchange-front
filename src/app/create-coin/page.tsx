@@ -19,11 +19,19 @@ const formSchema = z.object({
   name: z
     .string()
     .min(3, 'Name must be at least 3 characters')
-    .max(50, 'Name must be less than 50 characters'),
+    .max(50, 'Name must be less than 50 characters')
+    .regex(
+      /^[a-zA-Z0-9]+$/,
+      'Name must contain only letters and numbers (no spaces or special characters)'
+    ),
   symbol: z
     .string()
-    .min(2, 'Symbol must be at least 2 characters')
-    .max(10, 'Symbol must be less than 10 characters')
+    .min(3, 'Ticker must be at least 3 characters')
+    .max(10, 'Ticker must be less than 10 characters')
+    .regex(
+      /^[A-Z0-9]*$/,
+      'Ticker must contain only uppercase alphanumeric characters'
+    )
     .toUpperCase(),
   description: z
     .string()
@@ -251,7 +259,7 @@ const Page = () => {
               </div>
 
               <p className='text-gray-400 text-center text-sm'>
-                Cost of launching a memecoin is 0.01 EGLD
+                Cost of launching a memecoin is 0.1 EGLD
               </p>
 
               <RequireAuth onClick={handleSubmit(onSubmit)}>
@@ -267,7 +275,7 @@ const Page = () => {
         </CardContent>
       </Card>
 
-      <Card className='w-full max-w-6xl mx-auto bg-[#1e222d]  mt-4 py-10 flex flex-col items-center gap-4'>
+      <Card className='w-full max-w-6xl mx-auto bg-[#1e222d]  mt-4 py-10 flex flex-col items-center gap-4 px-6'>
         <Button
           type='button'
           className='w-full max-w-xl mx-auto bg-teal-500 text-white p-3 rounded-md hover:bg-teal-600 transition-colors'

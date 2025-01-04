@@ -61,7 +61,8 @@ export const metadata: Metadata = {
     'msapplication-TileColor': '#000000',
     'theme-color': '#000000',
     'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'black'
+    'apple-mobile-web-app-status-bar-style': 'black',
+    'mobile-web-app-capable': 'yes'
   }
 };
 
