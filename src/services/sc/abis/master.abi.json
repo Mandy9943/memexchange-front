@@ -73,6 +73,10 @@
             {
                 "name": "oracle_address",
                 "type": "Address"
+            },
+            {
+                "name": "branding_address",
+                "type": "Address"
             }
         ],
         "outputs": []
@@ -130,6 +134,17 @@
             "allow_multiple_var_args": true
         },
         {
+            "name": "giveTokenOwnership",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "token_id",
+                    "type": "TokenIdentifier"
+                }
+            ],
+            "outputs": []
+        },
+        {
             "name": "getState",
             "mutability": "readonly",
             "inputs": [],
@@ -148,6 +163,27 @@
                     "type": "Address"
                 }
             ]
+        },
+        {
+            "name": "getBrandingAddress",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "setBrandingAddress",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "branding_address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
         },
         {
             "name": "setFeesCollector",
