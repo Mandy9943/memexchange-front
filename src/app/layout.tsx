@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout';
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -69,6 +70,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className={inter.className}>
+      <head>
+        <Script
+          src='https://analytics.ahrefs.com/analytics.js'
+          data-key='ISj68cQcHMuy65A48pNxPg'
+          strategy='afterInteractive'
+        />
+      </head>
       <body className={`${inter.className} bg-neutral-900 text-white`}>
         <NextSSRPlugin
           /**
