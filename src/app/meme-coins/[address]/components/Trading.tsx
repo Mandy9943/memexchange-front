@@ -1,5 +1,6 @@
 'use client';
 
+import { tokensID } from '@/config';
 import { useBondingPair } from '@/hooks/useBondingPair';
 import useGetAccountToken from '@/hooks/useGetAccountToken';
 import { useGetAmountOut } from '@/hooks/useGetAmountOut';
@@ -29,13 +30,11 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
   const { address } = useParams();
   const [activeTab, setActiveTab] = useState<TradeType>('buy');
   const { bondingPair } = useBondingPair(address as string);
+  const [useEgld, setUseEgld] = useState(true);
   const { accountToken: firstAccountToken } = useGetAccountToken(firstTokenId);
-  const { accountToken: secondAccountToken } =
-    useGetAccountToken(secondTokenId);
-  console.log(firstAccountToken);
-  console.log(secondAccountToken);
-
-  console.log(bondingPair);
+  const { accountToken: secondAccountToken } = useGetAccountToken(
+    useEgld ? tokensID.egld : secondTokenId
+  );
 
   const {
     handleSubmit,
@@ -51,17 +50,12 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
   const amount = watch('amount');
 
   const [slippage, setSlippage] = useState(0.5); // 0.5% default slippage
-  console.log(amount);
 
   const { amountOut, isLoading: isLoadingAmountOut } = useGetAmountOut(
     address as string,
     amount || '0',
     activeTab === 'buy' ? secondTokenId : firstTokenId
   );
-
-  console.log({
-    amountOut: new BigNumber(amountOut || '0').div(10 ** 18).toString()
-  });
 
   const handlePercentageClick = (percentage: number) => {
     const relevantToken =
@@ -79,14 +73,18 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
     // Calculate the exact amount
     const newAmount = balance.multipliedBy(percentageDecimal).div(decimals);
 
-    console.log('Setting new amount:', newAmount.toString()); // Debug log
     setValue('amount', newAmount.toString(), { shouldValidate: true });
   };
 
   const onSubmit = async (data: SwapFormData) => {
     try {
       const isInitialSwap = bondingPair?.state !== 'Active';
-      const tokenIn = activeTab === 'buy' ? secondTokenId : firstTokenId;
+      const tokenIn =
+        activeTab === 'buy'
+          ? useEgld
+            ? tokensID.egld
+            : secondTokenId
+          : firstTokenId;
       const tokenOut = activeTab === 'buy' ? firstTokenId : secondTokenId;
 
       // Calculate minimum amount out with slippage
@@ -94,10 +92,6 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
 
         .multipliedBy(1 - slippage / 100)
         .toFixed(0);
-
-      console.log({
-        minAmountOut
-      });
 
       await swap({
         contract: address as string,
@@ -114,6 +108,17 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
 
   return (
     <div className='bg-gray-800 rounded-lg p-4 space-y-4'>
+      {/* Add EGLD/WEGLD toggle */}
+      <div className='flex justify-end'>
+        <button
+          type='button'
+          className={cn('px-3 py-1 rounded text-sm', 'bg-gray-600')}
+          onClick={() => setUseEgld(!useEgld)}
+        >
+          {useEgld ? 'Use WEGLD' : 'Use EGLD'}
+        </button>
+      </div>
+
       {/* Tabs */}
       <div className='flex gap-2'>
         <button
@@ -158,11 +163,19 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
 
               return balance;
             })()}{' '}
-            {formatTokenI(activeTab === 'buy' ? secondTokenId : firstTokenId)}
+            {formatTokenI(
+              activeTab === 'buy'
+                ? useEgld
+                  ? tokensID.egld
+                  : secondTokenId
+                : firstTokenId
+            )}
           </div>
 
           <TokenAmount
-            tokenId={activeTab === 'buy' ? secondTokenId : firstTokenId}
+            tokenId={
+              activeTab === 'buy' ? secondAccountToken.identifier : firstTokenId
+            }
             value={amount}
             onChange={(e) => setValue('amount', e.target.value)}
           />
@@ -222,7 +235,9 @@ export const Trading = ({ firstTokenId, secondTokenId }: TradingProps) => {
                   .toNumber()
                   .toLocaleString()}{' '}
                 {formatTokenI(
-                  activeTab === 'buy' ? firstTokenId : secondTokenId
+                  activeTab === 'buy'
+                    ? firstTokenId
+                    : secondAccountToken.identifier
                 )}
               </>
             )}

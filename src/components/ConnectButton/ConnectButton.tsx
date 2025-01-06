@@ -1,12 +1,24 @@
 import { Button } from '@/components/ui/button';
-import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
+import { useAppDispatch } from '@/hooks/useRedux';
+import { setShard, setUserAddress } from '@/redux/dapp/dapp-slice';
+import {
+  useGetAccountInfo,
+  useGetIsLoggedIn
+} from '@multiversx/sdk-dapp/hooks';
 import { Wallet } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ConnectDialog } from './ConnectDialog';
 
 export const ConnectButton = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const { address, shard } = useGetAccountInfo();
+
+  useEffect(() => {
+    dispatch(setUserAddress(address));
+    dispatch(setShard(shard ?? 1));
+  }, [address, dispatch, shard]);
 
   if (isLoggedIn) {
     return null;

@@ -35,7 +35,7 @@ export const swap = async ({
       functionName: initialSwap ? 'initialSwap' : 'swap',
       arg: args,
       value: amountIn,
-      gasL: initialSwap ? 30_000_000 : 300_000_000
+      gasL: 300_000_000
     });
   } else {
     return interaction.ESDTTransfer({

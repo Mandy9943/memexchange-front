@@ -6,13 +6,10 @@ import {
   DialogTitle
 } from '@/components/ui/dialog';
 import { nativeAuth } from '@/config';
-import { useAppDispatch } from '@/hooks/useRedux';
 import { RouteNamesEnum } from '@/localConstants';
-import { setShard, setUserAddress } from '@/redux/dapp/dapp-slice';
 import { rewardService } from '@/services/rest/backendApi/reward';
 import {
   useExtensionLogin,
-  useGetAccountInfo,
   useGetLoginInfo,
   useWalletConnectV2Login,
   useWebWalletLogin
@@ -35,8 +32,6 @@ export const ConnectDialog = ({
   onOpenChange,
   onLoginRedirect
 }: ConnectDialogProps) => {
-  const dispatch = useAppDispatch();
-
   const commonProps = {
     callbackRoute: RouteNamesEnum.home,
     nativeAuth,
@@ -47,15 +42,6 @@ export const ConnectDialog = ({
   const [extensionLogin] = useExtensionLogin(commonProps);
   const [webWalletLogin] = useWebWalletLogin(commonProps);
   const [walletConnectLogin] = useWalletConnectV2Login(commonProps);
-
-  const { address, shard } = useGetAccountInfo();
-  useEffect(() => {
-    dispatch(
-      setUserAddress(process.env.NEXT_PUBLIC_CONNECTED_ADDRESS || address)
-    );
-
-    dispatch(setShard(shard || 1));
-  }, [address, dispatch, shard]);
 
   useEffect(() => {
     if (tokenLogin?.nativeAuthToken) {
