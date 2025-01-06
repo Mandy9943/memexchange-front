@@ -61,10 +61,8 @@ const ActionCard = ({ task }: { task: Task }) => {
       </CardHeader>
       <CardContent className='pt-0 flex justify-end'>
         {!done && (
-          <RequireAuth>
-            <Button className=' ' onClick={handleMakeTask}>
-              Make Task
-            </Button>
+          <RequireAuth onClick={handleMakeTask}>
+            <Button>Make Task</Button>
           </RequireAuth>
         )}
       </CardContent>
