@@ -1,22 +1,34 @@
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { getBondingPairs } from '@/services/rest/backendApi/bonding-pair';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import useSWR from 'swr';
 import Header from '../Header';
 import BondingCurveProgress from './components/BondingCurveProgress';
 import MarketCap from './components/MarketCap';
 
 function MemeCoins() {
-  const { data: bondingPairs } = useSWR('/bonding-pairs', getBondingPairs);
+  const [offset, setOffset] = useState(0);
+  const limit = 20;
+
+  const { data: bondingPairs, isLoading } = useSWR(
+    [`/bonding-pairs`, offset],
+    () => getBondingPairs(limit, offset)
+  );
+
+  const handleLoadMore = () => {
+    setOffset((prev) => prev + limit);
+  };
 
   return (
     <div className=''>
       <Header />
 
-      {bondingPairs && bondingPairs.length > 0 && (
+      {bondingPairs && bondingPairs.items.length > 0 && (
         <div className='flex flex-col gap-8'>
-          {bondingPairs.map((coin, idx) => (
+          {bondingPairs.items.map((coin, idx) => (
             <Link href={`/meme-coins/${coin.address}`} key={idx}>
               <Card
                 key={idx}
@@ -48,6 +60,20 @@ function MemeCoins() {
               </Card>
             </Link>
           ))}
+
+          {/* Pagination Controls */}
+          <div className='flex justify-center mt-4 mb-8'>
+            {bondingPairs.hasMore && (
+              <Button
+                onClick={handleLoadMore}
+                disabled={isLoading}
+                variant='outline'
+                className='text-white hover:bg-neutral-700'
+              >
+                {isLoading ? 'Loading...' : 'Load More'}
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </div>
