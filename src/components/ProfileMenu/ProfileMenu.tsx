@@ -25,7 +25,7 @@ export const ProfileMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className='rounded-full bg-blue-600 hover:bg-blue-700'>
+        <Button className='rounded-full bg-green-600 hover:bg-green-700'>
           Profile <CircleUser className='h-5 w-5' />
         </Button>
       </DropdownMenuTrigger>

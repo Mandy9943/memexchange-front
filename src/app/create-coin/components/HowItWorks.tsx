@@ -23,7 +23,7 @@ const HowItWorks = () => {
         <CardContent>
           <div className='space-y-4 text-gray-300'>
             <div className='flex items-start gap-2'>
-              <span className='bg-blue-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
                 1
               </span>
               <p>
@@ -32,7 +32,7 @@ const HowItWorks = () => {
               </p>
             </div>
             <div className='flex items-start gap-2'>
-              <span className='bg-blue-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
                 2
               </span>
               <p>
@@ -41,7 +41,7 @@ const HowItWorks = () => {
               </p>
             </div>
             <div className='flex items-start gap-2'>
-              <span className='bg-blue-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
                 3
               </span>
               <p>
@@ -50,7 +50,7 @@ const HowItWorks = () => {
               </p>
             </div>
             <div className='flex items-start gap-2'>
-              <span className='bg-blue-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
                 4
               </span>
               <p>
@@ -81,7 +81,7 @@ const HowItWorks = () => {
                     href='https://mvxbrand.fun/'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-blue-400 hover:text-blue-300'
+                    className='text-green-400 hover:text-green-300'
                   >
                     MVXBrand
                   </a>

@@ -243,12 +243,12 @@ const Page = () => {
                 )}
               </div>
 
-              <div className='mt-6 p-4 bg-blue-500/10 border-2 border-blue-500 rounded-lg'>
+              <div className='mt-6 p-4 bg-green-500/10 border-2 border-green-500 rounded-lg'>
                 <label className='flex items-center space-x-3 cursor-pointer'>
                   <input
                     type='checkbox'
                     {...register('creatorBuy')}
-                    className='w-5 h-5 accent-blue-500'
+                    className='w-5 h-5 accent-green-500'
                   />
                   <span className='text-white font-medium'>
                     I want to be the first buyer of this coin! 🚀
@@ -267,7 +267,7 @@ const Page = () => {
               <RequireAuth onClick={handleSubmit(onSubmit)}>
                 <button
                   type='button'
-                  className='w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-colors'
+                  className='w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600 transition-colors'
                 >
                   1. Launch Memecoin
                 </button>

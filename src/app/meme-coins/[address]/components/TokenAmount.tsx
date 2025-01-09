@@ -52,7 +52,7 @@ export const TokenAmount = forwardRef<HTMLInputElement, TokenAmountProps>(
           {...props}
         />
         <div className='flex items-center gap-2'>
-          <span className='text-blue-400'>{formatTokenI(tokenId)}</span>
+          <span className='text-green-400'>{formatTokenI(tokenId)}</span>
         </div>
       </div>
     );

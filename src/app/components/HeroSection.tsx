@@ -20,7 +20,7 @@ function HeroSection() {
 
       <div className='text-lg mb-4'>
         <h2 className='animate-shake'>Claim your Points by</h2>
-        <a href='#' className='underline hover:text-blue-200'>
+        <a href='#' className='underline hover:text-green-200'>
           connecting wallet
         </a>
       </div>

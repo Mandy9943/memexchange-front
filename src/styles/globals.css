@@ -20,7 +20,7 @@
 }
 
 .mx-transactions td > div > a {
-  @apply text-blue-600;
+  @apply text-green-600;
 }
 
 @layer base {
@@ -103,7 +103,7 @@ body {
 /* Links */
 
 a:hover {
-  @apply text-blue-200;
+  @apply text-green-200;
 }
 
 /* Headings */
@@ -153,7 +153,7 @@ footer a {
 
 /* Utility classes for sections */
 .hero-section {
-  @apply bg-blue-900 py-16 text-center;
+  @apply bg-green-900 py-16 text-center;
 }
 
 .hero-section .main-number {

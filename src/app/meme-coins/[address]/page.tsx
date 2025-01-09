@@ -95,7 +95,7 @@ const CoinPage = () => {
               <MarketCap bondingAddress={bondingAddress} />
               <BondingCurveProgress bondingAddress={bondingAddress} />
               <div
-                className='text-sm text-blue-400 flex gap-2 cursor-pointer'
+                className='text-sm text-green-400 flex gap-2 cursor-pointer'
                 onClick={() => {
                   navigator.clipboard.writeText(address as string);
                   toast.success('Address copied to clipboard!');

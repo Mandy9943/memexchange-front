@@ -50,7 +50,7 @@ export default function TokensPage() {
       case 'Inactive':
         return (
           <button
-            className='mt-4 w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors'
+            className='mt-4 w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors'
             onClick={() => {
               console.log(token.address);
 
@@ -176,7 +176,7 @@ export default function TokensPage() {
               <input
                 type='text'
                 placeholder='Search tokens...'
-                className='w-full pl-10 pr-4 py-2 border border-gray-800 rounded-lg bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                className='w-full pl-10 pr-4 py-2 border border-gray-800 rounded-lg bg-gray-900 focus:ring-2 focus:ring-green-500 focus:border-transparent'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

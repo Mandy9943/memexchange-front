@@ -69,7 +69,7 @@ export default function AdminRewardsPage() {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             />
           </div>
@@ -88,7 +88,7 @@ export default function AdminRewardsPage() {
                   points: parseInt(e.target.value) || 0
                 })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
               min='0'
             />
@@ -108,7 +108,7 @@ export default function AdminRewardsPage() {
               onChange={(e) =>
                 setFormData({ ...formData, doneStatus: e.target.value })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             />
           </div>
@@ -127,7 +127,7 @@ export default function AdminRewardsPage() {
               onChange={(e) =>
                 setFormData({ ...formData, undoneStatus: e.target.value })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             />
           </div>
@@ -142,7 +142,7 @@ export default function AdminRewardsPage() {
               onChange={(e) =>
                 setFormData({ ...formData, type: e.target.value })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             >
               <option value='link'>Link</option>
@@ -165,7 +165,7 @@ export default function AdminRewardsPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, linkUrl: e.target.value })
                 }
-                className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                 required
               />
             </div>
@@ -184,13 +184,13 @@ export default function AdminRewardsPage() {
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32'
+              className='w-full px-3 py-2 bg-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 h-32'
             />
           </div>
 
           <button
             type='submit'
-            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors'
+            className='w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors'
           >
             Create Reward
           </button>

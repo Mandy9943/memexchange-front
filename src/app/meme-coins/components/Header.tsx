@@ -11,7 +11,7 @@ const Header = () => {
       </div>
 
       <Link href={RouteNamesEnum.createCoin} className='hover:underline'>
-        <p className='text-blue-400 mb-4 text-center'>
+        <p className='text-green-400 mb-4 text-center'>
           Create your meme coin just for 0.1 EGLD
         </p>
       </Link>

@@ -47,7 +47,7 @@ const HoldersList = ({
                 href={`${network.explorerAddress}/accounts/${h.address}`}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-blue-400'
+                className='text-green-400'
               >
                 {contractAddress === h.address ? (
                   '(Bonding Curve)'
@@ -58,7 +58,7 @@ const HoldersList = ({
                 )}
               </a>
               <div>
-                <span className='text-blue-400'>
+                <span className='text-green-400'>
                   {formatNumber(
                     new BigNumber(h.balance).dividedBy(10 ** 18).toNumber()
                   )}
