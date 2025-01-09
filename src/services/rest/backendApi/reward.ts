@@ -89,5 +89,13 @@ export const rewardService = {
         }
       }
     );
+  },
+
+  getUserTasks: (authToken: string) => {
+    return fetchAxios<Task[]>('/rewards/tasks/user', {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    });
   }
 };

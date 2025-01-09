@@ -1,5 +1,5 @@
 import { rewardService } from '@/services/rest/backendApi/reward';
-import ActionCard from './ActionCard';
+import ActionCard from './ActionCardContainer';
 
 const ActionCards = async () => {
   const tasks = await rewardService.getAllTasks();

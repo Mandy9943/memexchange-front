@@ -1,19 +1,16 @@
+'use client';
+
 import { Card } from '@/components/ui/card';
 import { rewardService } from '@/services/rest/backendApi/reward';
-import { cookies } from 'next/headers';
+import Cookies from 'js-cookie';
+import useSWR from 'swr';
+function HeroSection() {
+  const { data, isLoading } = useSWR('/api/reward/isDoneConnectWallet', () =>
+    rewardService.isDoneConnectWallet(Cookies.get('auth-token')!)
+  );
+  const idDone = data?.isDone;
 
-async function HeroSection() {
-  let idDone = false;
-  try {
-    const data = await rewardService.isDoneConnectWallet(
-      cookies().get('auth-token')!.value
-    );
-    idDone = data?.isDone;
-  } catch (error) {
-    console.log(error);
-  }
-
-  if (idDone) {
+  if (idDone || isLoading) {
     return;
   }
 

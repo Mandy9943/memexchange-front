@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import CoinUploader from './components/CoinUploader';
+import HowItWorks from './components/HowItWorks';
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -166,6 +167,7 @@ const Page = () => {
 
   return (
     <div className='w-full'>
+      <HowItWorks />
       <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full'>
         <CardHeader>
           <CardTitle className='text-white text-center text-2xl'>
@@ -267,7 +269,7 @@ const Page = () => {
                   type='button'
                   className='w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition-colors'
                 >
-                  Launch Memecoin
+                  1. Launch Memecoin
                 </button>
               </RequireAuth>
             </div>
@@ -286,7 +288,7 @@ const Page = () => {
             })
           }
         >
-          Config Xexchange
+          2. Config Xexchange
         </Button>
 
         <Button
@@ -299,7 +301,7 @@ const Page = () => {
             })
           }
         >
-          Enable Transactions
+          3. Enable Transactions
         </Button>
       </Card>
     </div>

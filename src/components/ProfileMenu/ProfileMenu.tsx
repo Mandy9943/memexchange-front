@@ -7,13 +7,15 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { logout } from '@/helpers';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
-import { CircleUser, Coins, LogOut, Medal } from 'lucide-react';
+import { CircleUser, Coins, LogOut, Medal, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 
 export const ProfileMenu = () => {
   const { address } = useGetAccountInfo();
+  const { data } = useGetUserInfo();
 
   const handleDisconnect = () => {
     logout();
@@ -47,6 +49,17 @@ export const ProfileMenu = () => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
+        {data?.isAdmin && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href='/admin' className='flex items-center gap-2'>
+                <Shield className='h-4 w-4' />
+                <span>Admin Panel</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
         <DropdownMenuItem
           className='text-red-500 focus:text-red-500 cursor-pointer'
           onClick={handleDisconnect}
