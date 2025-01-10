@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     initialScale: 1
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/mxc-logo.webp',
-    shortcut: '/mxc-logo.webp'
+    icon: 'https://memexchange.fun/favicon.ico',
+    apple: 'https://memexchange.fun/mxc-logo.webp',
+    shortcut: 'https://memexchange.fun/mxc-logo.webp'
   },
-  manifest: '/manifest.json',
+  manifest: 'https://memexchange.fun/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
     images: [
       {
-        url: '/og-image.webp',
+        url: 'https://memexchange.fun/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'MemExchange - MultiversX Meme Coin Trading Platform'
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: 'MemExchange - Trade Meme Coins on MultiversX',
     description:
       'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
-    images: ['/og-image.webp']
+    images: ['https://memexchange.fun/og-image.webp']
   },
   other: {
     'msapplication-TileColor': '#000000',
