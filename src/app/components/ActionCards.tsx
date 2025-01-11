@@ -5,7 +5,7 @@ import ActionCard from './ActionCardContainer';
 
 const ActionCards = () => {
   const { data: tasks, isLoading } = useSWR(
-    '/api/tasks',
+    '/api/rewards/tasks',
     rewardService.getAllTasks
   );
 
