@@ -46,6 +46,11 @@ function MemeCoins() {
                   <div className='flex flex-1 text-white flex-col'>
                     <div>
                       <p className='text-lg font-semibold'>{coin.coin?.name}</p>
+                      {coin.coin?.description && (
+                        <p className='text-sm text-neutral-400 mt-1 line-clamp-2'>
+                          {coin.coin.description}
+                        </p>
+                      )}
                     </div>
                     <div className='mb-1'>
                       <MarketCap bondingAddress={coin.address} />
