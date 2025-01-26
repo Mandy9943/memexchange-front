@@ -22,12 +22,12 @@ export const network = {
 
 export const scAddress = {
   wrapEGLDShard0:
-    'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
+    'erd1qqqqqqqqqqqqqpgqvc7gdl0p4s97guh498wgz75k8sav6sjfjlwqh679jy',
   wrapEGLDShard1:
-    'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
+    'erd1qqqqqqqqqqqqqpgqhe8t5jewej70zupmh44jurgn29psua5l2jps3ntjj3',
   wrapEGLDShard2:
-    'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
-  degenMaster: 'erd1qqqqqqqqqqqqqpgqv9ru0egzzuweqrfc6d6fuzem29fztwkfpl6s3zu7tx'
+    'erd1qqqqqqqqqqqqqpgqmuk0q2saj0mgutxm4teywre6dl8wqf58xamqdrukln',
+  degenMaster: 'erd1qqqqqqqqqqqqqpgq35afjljqqvgemslv6knpfqejh3u72u93pl6s0cc4gc'
 };
 
 export const ChainID = '1';
