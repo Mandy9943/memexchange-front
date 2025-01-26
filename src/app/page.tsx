@@ -24,10 +24,10 @@ export default function LandingPage() {
             </p>
             <div className='flex gap-4'>
               <Link
-                href='/rewards'
+                href='/meme-coins'
                 className='bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-medium transition-colors'
               >
-                Earn Rewards
+                Trade Meme Coins
               </Link>
               <Link
                 href='/create-coin'
@@ -124,7 +124,7 @@ const features = [
     icon: '🔒',
     title: 'Smart Contracts',
     description:
-      'Secure and audited smart contracts ensuring safe and transparent trading'
+      'Transparent and permissionless trading through blockchain technology'
   }
 ];
 
