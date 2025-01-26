@@ -5,7 +5,7 @@ import { fetchAllBondingData } from '@/services/sc/degen_master/queries';
 import BigNumber from 'bignumber.js';
 import useSWR from 'swr';
 
-const maxMarketCap = 300 * 10 ** 6;
+const maxMarketCap = 4000 * 10 ** 6;
 
 const BondingCurveProgress = ({
   bondingAddress
