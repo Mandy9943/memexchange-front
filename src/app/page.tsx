@@ -16,11 +16,19 @@ export default function LandingPage() {
               className='mb-8'
             />
             <h1 className='text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent'>
-              The Future of Meme Coins
+              Launch Your Next Meme Coin
             </h1>
             <p className='text-xl text-gray-300 mb-8 max-w-2xl'>
-              Launch and trade meme coins with automated liquidity and bonding
-              curve mechanics on MultiversX
+              Launch and trade meme coins with guaranteed liquidity on{' '}
+              <a
+                href='https://xexchange.com/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-green-400 hover:text-green-300 underline'
+              >
+                xExchange
+              </a>
+              . Zero presale, zero team allocation, 100% community-driven.
             </p>
             <div className='flex gap-4'>
               <Link
@@ -48,8 +56,9 @@ export default function LandingPage() {
           </h2>
           <div className='grid md:grid-cols-3 gap-8'>
             {features.map((feature, index) => (
-              <div
+              <Link
                 key={index}
+                href={feature.link}
                 className='bg-neutral-800 p-6 rounded-lg hover:bg-neutral-700 transition-colors'
               >
                 <div className='text-green-400 mb-4'>{feature.icon}</div>
@@ -57,7 +66,7 @@ export default function LandingPage() {
                   {feature.title}
                 </h3>
                 <p className='text-gray-400'>{feature.description}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -109,22 +118,25 @@ export default function LandingPage() {
 
 const features = [
   {
+    icon: '🛡️',
+    title: 'Fair Launch Guaranteed',
+    description:
+      'Every token launches with zero presale and zero team allocation. Pure community-driven growth.',
+    link: '/create-coin'
+  },
+  {
     icon: '🔄',
-    title: 'Bonding Curve',
+    title: 'Automated Liquidity',
     description:
-      'Automated price discovery and liquidity through mathematical bonding curves'
+      'When tokens reach $4,000 market cap, liquidity automatically flows to xExchange for enhanced trading',
+    link: 'https://xexchange.com/trade'
   },
   {
-    icon: '💧',
-    title: 'Instant Liquidity',
+    icon: '🎨',
+    title: 'MVXBrand Integration',
     description:
-      'No need for initial liquidity - start trading immediately after launch'
-  },
-  {
-    icon: '🔒',
-    title: 'Smart Contracts',
-    description:
-      'Transparent and permissionless trading through blockchain technology'
+      'Brand your tokens with custom images and social links that appear directly on the MultiversX Explorer',
+    link: 'https://mvxbrand.fun/'
   }
 ];
 
@@ -135,14 +147,16 @@ const steps = [
   },
   {
     title: 'Create or Trade',
-    description: 'Launch your own meme coin or trade existing ones'
+    description: 'Launch your own meme coin or trade from a curated selection'
+  },
+  {
+    title: 'Brand Your Token',
+    description:
+      'After migration, customize your token with images and social links on MVXBrand'
   },
   {
     title: 'Earn Rewards',
-    description: 'Complete tasks and earn points for rewards'
-  },
-  {
-    title: 'Join Community',
-    description: 'Become part of the growing MemExchange ecosystem'
+    description:
+      'Participate in the ecosystem and earn points through our rewards program'
   }
 ];
