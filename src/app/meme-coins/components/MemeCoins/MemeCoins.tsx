@@ -27,27 +27,30 @@ function MemeCoins() {
       <Header />
 
       {bondingPairs && bondingPairs.items.length > 0 && (
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-4 sm:gap-8'>
           {bondingPairs.items.map((coin, idx) => (
             <Link href={`/meme-coins/${coin.address}`} key={idx}>
               <Card
                 key={idx}
-                className='bg-neutral-800 border border-neutral-700 p-4 hover:bg-neutral-700 transition-all'
+                className='bg-neutral-800 border border-neutral-700 p-3 sm:p-4 hover:bg-neutral-700 transition-all'
               >
-                <div className='flex items-center gap-4'>
+                <div className='flex items-center gap-2 sm:gap-4'>
                   {coin.coin && (
                     <Image
                       src={coin.coin?.imageUrl}
                       alt={coin.coin?.name}
-                      width={100}
-                      height={100}
+                      width={60}
+                      height={60}
+                      className='w-[60px] h-[60px] sm:w-[100px] sm:h-[100px]'
                     />
                   )}
                   <div className='flex flex-1 text-white flex-col'>
                     <div>
-                      <p className='text-lg font-semibold'>{coin.coin?.name}</p>
+                      <p className='text-base sm:text-lg font-semibold'>
+                        {coin.coin?.name}
+                      </p>
                       {coin.coin?.description && (
-                        <p className='text-sm text-neutral-400 mt-1 line-clamp-2'>
+                        <p className='text-xs sm:text-sm text-neutral-400 mt-1 line-clamp-2'>
                           {coin.coin.description}
                         </p>
                       )}
@@ -57,7 +60,7 @@ function MemeCoins() {
                     </div>
                     <BondingCurveProgress bondingAddress={coin.address} />
 
-                    <p className='text-sm text-muted-foreground'>
+                    <p className='text-xs sm:text-sm text-muted-foreground break-all'>
                       {coin.address}
                     </p>
                   </div>
