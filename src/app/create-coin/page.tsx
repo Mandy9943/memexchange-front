@@ -268,7 +268,6 @@ const Page = () => {
                 <button
                   type='button'
                   className='w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600 transition-colors'
-                  disabled={true}
                 >
                   1. Launch Memecoin
                 </button>
