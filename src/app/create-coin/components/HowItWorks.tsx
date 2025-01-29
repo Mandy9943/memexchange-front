@@ -6,63 +6,65 @@ const HowItWorks = () => {
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   return (
-    <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mb-4'>
+    <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mb-3 md:mb-4'>
       <CardHeader
-        className='cursor-pointer flex flex-row items-center justify-between'
+        className='cursor-pointer flex flex-row items-center justify-between p-3 md:p-4'
         onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
       >
-        <CardTitle className='text-white text-xl'>How it Works</CardTitle>
+        <CardTitle className='text-white text-lg md:text-xl'>
+          How it Works
+        </CardTitle>
         {isHowItWorksOpen ? (
-          <ChevronUp className='h-6 w-6 text-white' />
+          <ChevronUp className='h-5 w-5 md:h-6 md:w-6 text-white' />
         ) : (
-          <ChevronDown className='h-6 w-6 text-white' />
+          <ChevronDown className='h-5 w-5 md:h-6 md:w-6 text-white' />
         )}
       </CardHeader>
 
       {isHowItWorksOpen && (
-        <CardContent>
-          <div className='space-y-4 text-gray-300'>
-            <div className='flex items-start gap-2'>
-              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+        <CardContent className='p-3 md:p-4'>
+          <div className='space-y-3 md:space-y-4 text-gray-300'>
+            <div className='flex items-start gap-2 md:gap-3'>
+              <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 1
               </span>
-              <p>
+              <p className='text-sm md:text-base'>
                 Fill out the form with your memecoin details and choose if you
                 want to be the first buyer.
               </p>
             </div>
-            <div className='flex items-start gap-2'>
-              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+            <div className='flex items-start gap-2 md:gap-3'>
+              <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 2
               </span>
-              <p>
+              <p className='text-sm md:text-base'>
                 Click &quot;Launch Memecoin&quot; button and pay 0.1 EGLD
                 (one-time payment).
               </p>
             </div>
-            <div className='flex items-start gap-2'>
-              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+            <div className='flex items-start gap-2 md:gap-3'>
+              <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 3
               </span>
-              <p>
+              <p className='text-sm md:text-base'>
                 After launch, click &quot;Config Xexchange&quot; to set up
                 trading parameters.
               </p>
             </div>
-            <div className='flex items-start gap-2'>
-              <span className='bg-green-500 text-white w-6 h-6 flex justify-center items-center rounded-full text-sm'>
+            <div className='flex items-start gap-2 md:gap-3'>
+              <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 4
               </span>
-              <p>
+              <p className='text-sm md:text-base'>
                 Finally, click &quot;Enable Transactions&quot; to activate
                 trading.
               </p>
             </div>
-            <div className='mt-4 p-4 bg-gray-800/50 rounded-lg'>
-              <p className='font-semibold text-white mb-2'>
+            <div className='mt-3 md:mt-4 p-3 md:p-4 bg-gray-800/50 rounded-lg'>
+              <p className='font-semibold text-white mb-2 text-sm md:text-base'>
                 What happens next?
               </p>
-              <ul className='list-disc list-inside space-y-2 text-sm'>
+              <ul className='list-disc list-inside space-y-1.5 md:space-y-2 text-xs md:text-sm'>
                 <li>
                   Your coin will appear in your Profile&apos;s Tokens section
                 </li>

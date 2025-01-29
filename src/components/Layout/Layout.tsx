@@ -10,7 +10,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         ⚠️ Running on Devnet
       </div> */}
 
-      <main className='flex flex-grow items-stretch justify-center p-8 flex-1'>
+      <main className='flex flex-grow items-stretch justify-center px-4 sm:px-8 py-14 flex-1'>
         <Header />
 
         {children}

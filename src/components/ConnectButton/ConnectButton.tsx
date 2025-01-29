@@ -27,7 +27,7 @@ export const ConnectButton = () => {
   return (
     <>
       <Button
-        className='text-white mt-5 mr-5 rounded-full bg-[#0a6320] hover:bg-[#0a6320]/80'
+        className='text-white mx-auto rounded-full bg-[#0a6320] hover:bg-[#0a6320]/80'
         onClick={() => setOpen(true)}
       >
         <Wallet size={'16px'} /> Connect Wallet

@@ -7,9 +7,13 @@ export const Header = () => {
 
   return (
     <div className='absolute top-0 left-0 flex justify-between items-center w-full px-5 py-2'>
-      <div className='flex-1'>{/* Logo can go here */}</div>
-      <div className='flex items-center gap-4'>
-        {isLoggedIn && <ProfileMenu />}
+      <div className='flex items-center gap-4 w-full'>
+        {isLoggedIn && (
+          <div className='w-full flex justify-center'>
+            {' '}
+            <ProfileMenu />{' '}
+          </div>
+        )}
         <ConnectButton />
       </div>
     </div>

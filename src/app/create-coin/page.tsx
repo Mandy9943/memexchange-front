@@ -166,108 +166,108 @@ const Page = () => {
   });
 
   return (
-    <div className='w-full'>
+    <div className='w-full px-4 py-4 md:py-8'>
       <HowItWorks />
       <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full'>
-        <CardHeader>
-          <CardTitle className='text-white text-center text-2xl'>
+        <CardHeader className='p-4 md:p-6'>
+          <CardTitle className='text-white text-center text-xl md:text-2xl'>
             Launch new coin
           </CardTitle>
         </CardHeader>
 
-        <CardContent className='w-full max-w-xl mx-auto'>
+        <CardContent className='w-full max-w-xl mx-auto p-4 md:p-6'>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col gap-6'
+            className='flex flex-col gap-4 md:gap-6'
           >
-            <div className='space-y-4'>
-              <div className='flex justify-center mb-6'>
+            <div className='space-y-3 md:space-y-4'>
+              <div className='flex justify-center mb-4 md:mb-6'>
                 <CoinUploader
                   onUploadComplete={(url) => setValue('imageUrl', url)}
                   initialPreview={watch('imageUrl')}
                 />
               </div>
               {errors.imageUrl && (
-                <p className='text-red-500 text-sm mt-1'>
+                <p className='text-red-500 text-xs md:text-sm mt-1'>
                   {errors.imageUrl.message}
                 </p>
               )}
 
               <div>
-                <label className='text-white text-sm mb-2 block'>
+                <label className='text-white text-xs md:text-sm mb-1.5 md:mb-2 block'>
                   Memecoin Name
                 </label>
                 <input
                   {...register('name')}
                   type='text'
                   placeholder='Enter coin name'
-                  className='w-full bg-[#2a2f3b] text-white p-3 rounded-md'
+                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
                 />
                 {errors.name && (
-                  <p className='text-red-500 text-sm mt-1'>
+                  <p className='text-red-500 text-xs md:text-sm mt-1'>
                     {errors.name.message}
                   </p>
                 )}
               </div>
 
               <div>
-                <label className='text-white text-sm mb-2 block'>
+                <label className='text-white text-xs md:text-sm mb-1.5 md:mb-2 block'>
                   Memecoin Symbol
                 </label>
                 <input
                   {...register('symbol')}
                   type='text'
                   placeholder='Enter coin symbol'
-                  className='w-full bg-[#2a2f3b] text-white p-3 rounded-md'
+                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
                 />
                 {errors.symbol && (
-                  <p className='text-red-500 text-sm mt-1'>
+                  <p className='text-red-500 text-xs md:text-sm mt-1'>
                     {errors.symbol.message}
                   </p>
                 )}
               </div>
 
               <div>
-                <label className='text-white text-sm mb-2 block'>
+                <label className='text-white text-xs md:text-sm mb-1.5 md:mb-2 block'>
                   Description
                 </label>
                 <textarea
                   {...register('description')}
                   placeholder='Enter description here...'
-                  className='w-full bg-[#2a2f3b] text-white p-3 rounded-md min-h-[200px]'
+                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md min-h-[120px] md:min-h-[200px] text-sm md:text-base'
                 />
                 {errors.description && (
-                  <p className='text-red-500 text-sm mt-1'>
+                  <p className='text-red-500 text-xs md:text-sm mt-1'>
                     {errors.description.message}
                   </p>
                 )}
               </div>
 
-              <div className='mt-6 p-4 bg-green-500/10 border-2 border-green-500 rounded-lg'>
-                <label className='flex items-center space-x-3 cursor-pointer'>
+              <div className='mt-4 md:mt-6 p-3 md:p-4 bg-green-500/10 border-2 border-green-500 rounded-lg'>
+                <label className='flex items-center space-x-2 md:space-x-3 cursor-pointer'>
                   <input
                     type='checkbox'
                     {...register('creatorBuy')}
-                    className='w-5 h-5 accent-green-500'
+                    className='w-4 h-4 md:w-5 md:h-5 accent-green-500'
                   />
-                  <span className='text-white font-medium'>
+                  <span className='text-white font-medium text-sm md:text-base'>
                     I want to be the first buyer of this coin! 🚀
                   </span>
                 </label>
-                <p className='text-gray-400 text-sm mt-2 ml-8'>
+                <p className='text-gray-400 text-xs md:text-sm mt-1.5 md:mt-2 ml-6 md:ml-8'>
                   By checking this box, you&apos;ll automatically become the
                   first buyer when the coin launches
                 </p>
               </div>
 
-              <p className='text-gray-400 text-center text-sm'>
+              <p className='text-gray-400 text-center text-xs md:text-sm'>
                 Cost of launching a memecoin is 0.1 EGLD
               </p>
 
               <RequireAuth onClick={handleSubmit(onSubmit)}>
                 <button
                   type='button'
-                  className='w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600 transition-colors'
+                  className='w-full bg-green-500 text-white p-2.5 md:p-3 rounded-md hover:bg-green-600 transition-colors text-sm md:text-base'
                 >
                   1. Launch Memecoin
                 </button>
@@ -277,10 +277,10 @@ const Page = () => {
         </CardContent>
       </Card>
 
-      <Card className='w-full max-w-6xl mx-auto bg-[#1e222d]  mt-4 py-10 flex flex-col items-center gap-4 px-6'>
+      <Card className='w-full max-w-6xl mx-auto bg-[#1e222d] mt-4 py-6 md:py-10 flex flex-col items-center gap-3 md:gap-4 px-4 md:px-6'>
         <Button
           type='button'
-          className='w-full max-w-xl mx-auto bg-teal-500 text-white p-3 rounded-md hover:bg-teal-600 transition-colors'
+          className='w-full max-w-xl mx-auto bg-teal-500 text-white p-2.5 md:p-3 rounded-md hover:bg-teal-600 transition-colors text-sm md:text-base'
           disabled={!newPairContract}
           onClick={() =>
             issueLpToken({
@@ -293,7 +293,7 @@ const Page = () => {
 
         <Button
           type='button'
-          className='w-full max-w-xl mx-auto bg-teal-500 text-white p-3 rounded-md hover:bg-teal-600 transition-colors'
+          className='w-full max-w-xl mx-auto bg-teal-500 text-white p-2.5 md:p-3 rounded-md hover:bg-teal-600 transition-colors text-sm md:text-base'
           disabled={!newPairContract}
           onClick={() =>
             setLocalRoles({
