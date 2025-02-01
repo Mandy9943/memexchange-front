@@ -5,12 +5,12 @@ import { rewardService } from '@/services/rest/backendApi/reward';
 import Cookies from 'js-cookie';
 import useSWR from 'swr';
 function HeroSection() {
-  const { data, isLoading } = useSWR('/api/reward/isDoneConnectWallet', () =>
+  const { data } = useSWR('/api/reward/isDoneConnectWallet', () =>
     rewardService.isDoneConnectWallet(Cookies.get('auth-token')!)
   );
   const idDone = data?.isDone;
 
-  if (idDone || isLoading) {
+  if (idDone) {
     return;
   }
 
