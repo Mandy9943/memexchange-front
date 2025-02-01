@@ -37,10 +37,17 @@ function Leaderboard() {
       <CardHeader>
         <CardTitle className='text-xl'>Top Users</CardTitle>
         <p className='text-sm text-neutral-400'>
-          Win prizes every 24h
+          Weekly prizes by points
           <br />
-          The winners will receive prizes{' '}
-          <span className='text-green-400'>soon</span>
+          First week rewards coming soon - keep collecting points!
+          <br />
+          Prize distribution:
+          <br />
+          <span className='text-green-400'>1st place: 1 EGLD</span>
+          <br />
+          <span className='text-green-400'>2nd place: 0.6 EGLD</span>
+          <br />
+          <span className='text-green-400'>3rd place: 0.4 EGLD</span>
         </p>
       </CardHeader>
       <CardContent>
@@ -65,7 +72,15 @@ function Leaderboard() {
                 <td className='py-2'>{index + 1}</td>
                 <td>{formatAddress(user.address)}</td>
                 <td>{user.points}</td>
-                <td>-</td>
+                <td>
+                  {index === 0
+                    ? '1 EGLD'
+                    : index === 1
+                    ? '0.6 EGLD'
+                    : index === 2
+                    ? '0.4 EGLD'
+                    : '-'}
+                </td>
               </tr>
             ))}
           </tbody>
