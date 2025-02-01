@@ -203,3 +203,22 @@ footer a {
 .dapp-core-component__transactionStatusToastStyles__transactions-status-toast-content {
   background-color: rgb(30, 37, 47) !important;
 }
+.dapp-core-component__dappModalStyles__dappModalContent{
+  background-color: rgb(30, 37, 47) !important;
+  z-index: 10000 !important;
+.dapp-core-component__dappModalStyles__dappModalHeader {
+  button {
+    background-color: rgb(30, 37, 47) !important;
+    color: white !important;
+  }
+}
+
+.dapp-core-component__walletConnectLoginContainerStyles__xPortal-pairing-button {
+  background-color: rgb(51, 53, 56) !important;
+  color: white !important;
+}
+}
+
+body{
+  pointer-events: initial !important;
+}

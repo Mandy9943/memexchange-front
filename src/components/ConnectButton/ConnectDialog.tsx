@@ -11,7 +11,6 @@ import { rewardService } from '@/services/rest/backendApi/reward';
 import {
   useExtensionLogin,
   useGetLoginInfo,
-  useWalletConnectV2Login,
   useWebWalletLogin
 } from '@multiversx/sdk-dapp/hooks';
 import { useEffect, useRef } from 'react';
@@ -20,6 +19,13 @@ import {
   WalletConnectIcon,
   XPortalIcon
 } from '../Icons/customIcons';
+import { WalletConnectLoginButton } from '../sdkDappComponents';
+
+interface NavigatorWithUserAgentData extends Navigator {
+  userAgentData?: {
+    platform: string;
+  };
+}
 
 interface ConnectDialogProps {
   open: boolean;
@@ -41,7 +47,21 @@ export const ConnectDialog = ({
   const { tokenLogin } = useGetLoginInfo();
   const [extensionLogin] = useExtensionLogin(commonProps);
   const [webWalletLogin] = useWebWalletLogin(commonProps);
-  const [walletConnectLogin] = useWalletConnectV2Login(commonProps);
+
+  // Improved OS detection with modern API and fallbacks
+  const isMacOS = () => {
+    if (
+      typeof (navigator as NavigatorWithUserAgentData)?.userAgentData !==
+      'undefined'
+    ) {
+      return (
+        (
+          navigator as NavigatorWithUserAgentData
+        ).userAgentData?.platform.toLowerCase() === 'macos'
+      );
+    }
+    return /mac/i.test(navigator.userAgent);
+  };
 
   useEffect(() => {
     if (tokenLogin?.nativeAuthToken) {
@@ -69,13 +89,15 @@ export const ConnectDialog = ({
         <p className='text-center text-gray-400 text-sm'>Available Wallets</p>
 
         <div className='flex justify-center gap-5'>
-          <div
-            onClick={() => extensionLogin()}
-            className='cursor-pointer flex flex-col items-center gap-2'
-          >
-            <DefiWalletIcon height={25} />
-            <p className='text-sm'> Defi Wallet</p>
-          </div>
+          {!isMacOS() && (
+            <div
+              onClick={() => extensionLogin()}
+              className='cursor-pointer flex flex-col items-center gap-2'
+            >
+              <DefiWalletIcon height={25} />
+              <p className='text-sm'> Defi Wallet</p>
+            </div>
+          )}
           <div
             onClick={() => webWalletLogin()}
             className='cursor-pointer flex flex-col items-center gap-2'
@@ -83,13 +105,14 @@ export const ConnectDialog = ({
             <WalletConnectIcon height={25} />
             <p className='text-sm'> Wallet Connect</p>
           </div>
-          <div
-            onClick={() => walletConnectLogin()}
-            className='cursor-pointer flex flex-col items-center gap-2'
+          <WalletConnectLoginButton
+            loginButtonText='xPortal App'
+            {...commonProps}
+            className='!bg-transparent !border-none !shadow-none !flex !flex-col !items-center !gap-2 !p-0 !m-0'
           >
             <XPortalIcon height={25} />
             <p className='text-sm'> xPortal App</p>
-          </div>
+          </WalletConnectLoginButton>
         </div>
       </DialogContent>
     </Dialog>
