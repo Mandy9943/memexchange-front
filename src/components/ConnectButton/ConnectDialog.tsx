@@ -50,6 +50,9 @@ export const ConnectDialog = ({
 
   // Improved OS detection with modern API and fallbacks
   const isMacOS = () => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
     if (
       typeof (navigator as NavigatorWithUserAgentData)?.userAgentData !==
       'undefined'
