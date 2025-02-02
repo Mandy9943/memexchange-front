@@ -14,7 +14,7 @@ const TVChartContainer = ({ tokenIdentifier }: { tokenIdentifier: string }) => {
   useEffect(() => {
     const widgetOptions: ChartingLibraryWidgetOptions = {
       symbol: tokenIdentifier,
-      interval: '10' as ResolutionString,
+      interval: '30' as ResolutionString,
       debug: process.env.NODE_ENV !== 'production',
 
       library_path: `${process.env.NEXT_PUBLIC_FRONTED_URL}/static/charting_library/`,
