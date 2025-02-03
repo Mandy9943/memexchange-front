@@ -58,12 +58,12 @@ const HoldersList = ({
                 )}
               </a>
               <div>
-                <span className='text-green-400'>
+                <span className='text-green-400 text-xs sm:text-md'>
                   {formatNumber(
                     new BigNumber(h.balance).dividedBy(10 ** 18).toNumber()
                   )}
                 </span>
-                <span className='text-gray-400 ml-2'>
+                <span className='text-gray-400 ml-2 text-xs sm:text-md'>
                   {formatNumber(percent.toNumber())}%
                 </span>
               </div>
