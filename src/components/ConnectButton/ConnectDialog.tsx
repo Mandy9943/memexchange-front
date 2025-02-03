@@ -21,12 +21,6 @@ import {
 } from '../Icons/customIcons';
 import { WalletConnectLoginButton } from '../sdkDappComponents';
 
-interface NavigatorWithUserAgentData extends Navigator {
-  userAgentData?: {
-    platform: string;
-  };
-}
-
 interface ConnectDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -48,22 +42,12 @@ export const ConnectDialog = ({
   const [extensionLogin] = useExtensionLogin(commonProps);
   const [webWalletLogin] = useWebWalletLogin(commonProps);
 
-  // Improved OS detection with modern API and fallbacks
-  const isMacOS = () => {
-    if (typeof window === 'undefined') {
-      return false;
-    }
-    if (
-      typeof (navigator as NavigatorWithUserAgentData)?.userAgentData !==
-      'undefined'
-    ) {
-      return (
-        (
-          navigator as NavigatorWithUserAgentData
-        ).userAgentData?.platform.toLowerCase() === 'macos'
-      );
-    }
-    return /mac/i.test(navigator.userAgent);
+  // Updated device detection logic
+  const isMobileDevice = () => {
+    if (typeof window === 'undefined') return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   };
 
   useEffect(() => {
@@ -92,7 +76,7 @@ export const ConnectDialog = ({
         <p className='text-center text-gray-400 text-sm'>Available Wallets</p>
 
         <div className='flex justify-center gap-5'>
-          {!isMacOS() && (
+          {!isMobileDevice() && (
             <div
               onClick={() => extensionLogin()}
               className='cursor-pointer flex flex-col items-center gap-2'
