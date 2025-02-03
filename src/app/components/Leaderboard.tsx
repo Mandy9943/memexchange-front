@@ -49,6 +49,19 @@ function Leaderboard() {
           <br />
           <span className='text-green-400'>3rd place: 0.4 EGLD</span>
         </p>
+        <div className='mt-4 p-3 bg-green-900/30 rounded-lg border border-green-700'>
+          <p className='text-sm text-white'>
+            🏆 To be eligible for prizes, make sure to follow{' '}
+            <a
+              href='https://x.com/mem_exchange'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-green-400 hover:text-green-300 underline'
+            >
+              @mem_exchange on X
+            </a>
+          </p>
+        </div>
       </CardHeader>
       <CardContent>
         <div className='flex justify-between items-center mb-4'>
