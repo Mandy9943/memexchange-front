@@ -47,7 +47,7 @@ const HoldersList = ({
                 href={`${network.explorerAddress}/accounts/${h.address}`}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-green-400'
+                className='text-green-400 text-sm sm:text-md'
               >
                 {contractAddress === h.address ? (
                   '(Bonding Curve)'
