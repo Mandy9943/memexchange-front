@@ -6,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { network } from '@/config';
 import { logout } from '@/helpers';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
@@ -31,7 +32,13 @@ export const ProfileMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-56'>
         <DropdownMenuItem className='text-xs'>
-          {address?.slice(0, 6)}...{address?.slice(-4)}
+          <a
+            href={`${network.apiAddress}/accounts/${address}`}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {address?.slice(0, 6)}...{address?.slice(-4)}
+          </a>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
