@@ -33,7 +33,7 @@ export const ProfileMenu = () => {
       <DropdownMenuContent align='end' className='w-56'>
         <DropdownMenuItem className='text-xs'>
           <a
-            href={`${network.apiAddress}/accounts/${address}`}
+            href={`${network.explorerAddress}/accounts/${address}`}
             target='_blank'
             rel='noopener noreferrer'
           >
