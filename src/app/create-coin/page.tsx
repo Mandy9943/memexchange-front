@@ -99,12 +99,10 @@ const Page = () => {
   }, [watch]);
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     const res = await createCoin(data, 0.1);
     setSessionId(res.sessionId);
     // After successful submission
     clearFormData();
-    // Continue with your submission logic...
   };
 
   const [newPairContract, setNewPairContract] = useState<string | null>(null);
@@ -167,6 +165,32 @@ const Page = () => {
 
   return (
     <div className='w-full px-4 py-4 md:py-8'>
+      <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mb-4'>
+        <CardHeader className='p-4 md:p-6'>
+          <CardTitle className='text-white text-center text-xl md:text-2xl'>
+            Maintenance Notice
+          </CardTitle>
+        </CardHeader>
+        <CardContent className='w-full max-w-xl mx-auto p-4 md:p-6'>
+          <div className='text-center space-y-4 mb-4'>
+            <p className='text-white text-lg'>
+              We apologize for the inconvenience, but token creation is
+              temporarily disabled while we perform system updates.
+            </p>
+            <p className='text-gray-400'>
+              Please follow us on{' '}
+              <a
+                href='https://x.com/mem_exchange'
+                className='text-blue-400 hover:underline'
+              >
+                X (Twitter)
+              </a>{' '}
+              to stay informed about when the service will be back online.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       <HowItWorks />
       <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full'>
         <CardHeader className='p-4 md:p-6'>
@@ -265,12 +289,13 @@ const Page = () => {
               </p>
 
               <RequireAuth onClick={handleSubmit(onSubmit)}>
-                <button
+                <Button
                   type='button'
                   className='w-full bg-green-500 text-white p-2.5 md:p-3 rounded-md hover:bg-green-600 transition-colors text-sm md:text-base'
+                  disabled
                 >
                   1. Launch Memecoin
-                </button>
+                </Button>
               </RequireAuth>
             </div>
           </form>
