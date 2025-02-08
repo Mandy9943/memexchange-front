@@ -29,7 +29,6 @@ export const ConnectButton = () => {
       <Button
         className='text-white mx-auto rounded-full bg-[#0a6320] hover:bg-[#0a6320]/80'
         onClick={() => setOpen(true)}
-        disabled
       >
         <Wallet size={'16px'} /> Connect Wallet
       </Button>
