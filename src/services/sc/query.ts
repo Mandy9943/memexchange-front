@@ -34,14 +34,16 @@ export const fetchScSimpleData = async <T>(
 
 export const fetchScSimpleDataWithContract = async <T>(
   scInfo: string,
-  abi: AbiRegistry,
+  abi: unknown,
   args?: TypedValue[]
 ) => {
   const scInfoArr = scInfo.split(':');
   const scAddress = scInfoArr[0] as string;
   const funcName = scInfoArr[1];
+  console.log(scAddress, funcName, args);
 
   const res = await scQueryWithContract(scAddress, abi, funcName, args);
+  console.log(res);
 
   if (!res) {
     return;

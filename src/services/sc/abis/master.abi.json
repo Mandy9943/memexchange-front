@@ -47,7 +47,7 @@
                 "type": "TokenIdentifier"
             },
             {
-                "name": "max_market_cap",
+                "name": "max_second_token_reserve",
                 "type": "BigUint"
             },
             {
@@ -145,6 +145,22 @@
             "outputs": []
         },
         {
+            "name": "updateMaxSecondTokenReserveOnBonding",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "bonding_address",
+                    "type": "Address"
+                },
+                {
+                    "name": "max_second_token_reserve",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
             "name": "getFunds",
             "mutability": "mutable",
             "inputs": [],
@@ -202,6 +218,16 @@
                 }
             ],
             "outputs": []
+        },
+        {
+            "name": "getIVL",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
         },
         {
             "name": "setIVL",
@@ -270,12 +296,32 @@
             "outputs": []
         },
         {
-            "name": "setMaxMarketCap",
+            "name": "getReachDexFee",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "getMaxSecondTokenReserve",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "setMaxSecondTokenReserve",
             "onlyOwner": true,
             "mutability": "mutable",
             "inputs": [
                 {
-                    "name": "max_market_cap",
+                    "name": "max_second_token_reserve",
                     "type": "BigUint"
                 }
             ],

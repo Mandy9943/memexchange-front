@@ -93,7 +93,10 @@ const CoinPage = () => {
               </div>
 
               <MarketCap bondingAddress={bondingAddress} />
-              <BondingCurveProgress bondingAddress={bondingAddress} />
+              <BondingCurveProgress
+                bondingAddress={bondingAddress}
+                isFinished={bondingPair?.state === 'Finished'}
+              />
               <div
                 className='text-sm text-green-400 flex gap-2 cursor-pointer'
                 onClick={() => {
@@ -106,10 +109,24 @@ const CoinPage = () => {
             </div>
 
             {/* Trading Component */}
-            <Trading
-              firstTokenId={scBondingPair.firstTokenId}
-              secondTokenId={scBondingPair.secondTokenId}
-            />
+            {bondingPair?.state === 'Finished' ? (
+              <div className='bg-gray-800 rounded-lg p-4'>
+                <div className='text-center'>
+                  <h3 className='text-xl font-semibold text-yellow-400 mb-2'>
+                    Trading Disabled
+                  </h3>
+                  <p className='text-gray-400'>
+                    This token has been migrated to xExchange. Please visit
+                    xExchange to trade this token.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <Trading
+                firstTokenId={scBondingPair.firstTokenId}
+                secondTokenId={scBondingPair.secondTokenId}
+              />
+            )}
           </div>
         </div>
       </div>

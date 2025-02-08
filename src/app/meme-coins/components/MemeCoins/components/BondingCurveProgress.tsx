@@ -1,18 +1,28 @@
 'use client';
 
 import { Progress } from '@/components/ui/progress';
-import { fetchAllBondingData } from '@/services/sc/degen_master/queries';
+import {
+  fetchAllBondingData,
+  fetchMaxSecondTokenReserve
+} from '@/services/sc/degen_master/queries';
 import BigNumber from 'bignumber.js';
 import useSWR from 'swr';
 
-const maxMarketCap = 4000 * 10 ** 6;
-
 const BondingCurveProgress = ({
-  bondingAddress
+  bondingAddress,
+  isFinished
 }: {
   bondingAddress: string;
+  isFinished: boolean;
 }) => {
-  const { data: bondingData } = useSWR(
+  const {
+    data: maxSecondTokenReserveReq,
+    isLoading: isLoadingMaxSecondTokenReserve
+  } = useSWR(`master::getMaxSecondTokenReserve`, fetchMaxSecondTokenReserve);
+
+  const maxSecondTokenReserve = maxSecondTokenReserveReq || new BigNumber(0);
+
+  const { data: bondingData, isLoading: isLoadingBondingData } = useSWR(
     'master:getAllBondingData',
     fetchAllBondingData
   );
@@ -21,17 +31,33 @@ const BondingCurveProgress = ({
     (bonding) => bonding.address === bondingAddress
   );
 
-  const marketCap = new BigNumber(bondingPair?.marketCap || 0);
+  const secondTokenReserve = new BigNumber(
+    bondingPair?.secondTokenReserve || 0
+  );
 
-  const progress = marketCap.div(maxMarketCap).multipliedBy(100).toNumber();
+  const progress = secondTokenReserve
+    .div(maxSecondTokenReserve)
+    .multipliedBy(100)
+    .toNumber();
 
+  const isLoading = isLoadingMaxSecondTokenReserve || isLoadingBondingData;
+
+  if (isLoading) {
+    return (
+      <div>
+        <p className='text-xs text-muted-foreground mb-1'>Loading...</p>
+        <Progress value={0} className='bg-neutral-100/50 mb-2 animate-pulse' />
+      </div>
+    );
+  }
+  const progressValue = progress > 100 || isFinished ? 100 : progress;
   return (
     <>
       <div>
         <p className='text-xs text-muted-foreground mb-1'>
-          Bonding curve: {progress.toLocaleString()}%
+          Bonding curve: {progressValue.toLocaleString()}%
         </p>
-        <Progress value={progress} className='bg-neutral-700/50 mb-2' />
+        <Progress value={progressValue} className='bg-neutral-700/50 mb-2' />
       </div>
     </>
   );
