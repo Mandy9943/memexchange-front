@@ -1,5 +1,6 @@
 import { adaptAllBondingData } from '@/adapters/master-sc';
 import { ISCBoundingData } from '@/types/masterScTypes';
+import BigNumber from 'bignumber.js';
 import { scQuery } from '../query';
 
 // queries
@@ -26,4 +27,15 @@ export const fetchAllBondingData = async () => {
   console.log(data);
 
   return data;
+};
+
+export const fetchMaxSecondTokenReserve = async (): Promise<BigNumber> => {
+  const res = await scQuery('master', 'getMaxSecondTokenReserve');
+  console.log(res);
+
+  if (!res?.firstValue) {
+    return new BigNumber(0);
+  }
+
+  return res.firstValue.valueOf() as BigNumber;
 };
