@@ -31,7 +31,7 @@
                 "type": "BigUint"
             },
             {
-                "name": "max_market_cap",
+                "name": "max_second_token_reserve",
                 "type": "BigUint"
             },
             {
@@ -230,7 +230,7 @@
             "outputs": []
         },
         {
-            "name": "getMaxMarketCap",
+            "name": "getMaxSecondTokenReserve",
             "mutability": "readonly",
             "inputs": [],
             "outputs": [
@@ -240,11 +240,11 @@
             ]
         },
         {
-            "name": "setMaxMarketCap",
+            "name": "setMaxSecondTokenReserve",
             "mutability": "mutable",
             "inputs": [
                 {
-                    "name": "max_market_cap",
+                    "name": "max_second_token_reserve",
                     "type": "BigUint"
                 }
             ],
