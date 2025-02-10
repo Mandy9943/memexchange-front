@@ -58,7 +58,10 @@ function MemeCoins() {
                     <div className='mb-1'>
                       <MarketCap bondingAddress={coin.address} />
                     </div>
-                    <BondingCurveProgress bondingAddress={coin.address} />
+                    <BondingCurveProgress
+                      bondingAddress={coin.address}
+                      isFinished={coin.state === 'Finished'}
+                    />
 
                     <p className='text-xs sm:text-sm text-muted-foreground break-all'>
                       {coin.address}
