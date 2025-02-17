@@ -85,7 +85,7 @@ const CoinPage = () => {
                     {formatTokenI(scBondingPair.firstTokenId)}
                   </h1>
                   {bondingPair?.coin?.description && (
-                    <p className='text-gray-400 text-sm mt-2 max-w-md mx-auto break-all'>
+                    <p className='text-gray-400 text-sm mt-2 max-w-md mx-auto break-words'>
                       {bondingPair.coin.description
                         .split(/\s+/)
                         .map((word, index) => {
