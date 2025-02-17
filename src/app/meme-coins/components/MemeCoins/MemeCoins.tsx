@@ -53,7 +53,7 @@ function MemeCoins() {
       {bondingPairs && bondingPairs.items.length > 0 && (
         <div className='flex-1'>
           {/* Trending Coin */}
-          {!errorBondingPair && (
+          {!errorBondingPair && bondingPair && (
             <div className='mb-4 sm:mb-8 px-4 sm:px-0'>
               <Link href={`/meme-coins/${bondingPair?.address}`}>
                 <Card className='bg-gradient-to-br from-purple-900/90 via-indigo-900/90 to-blue-900/90 backdrop-blur-sm border-2 border-purple-500/30 hover:border-purple-400/50 p-3 sm:p-4 transition-all overflow-hidden relative w-full sm:max-w-xl mx-auto rounded-xl shadow-2xl hover:shadow-purple-500/20 transform hover:-translate-y-1'>
