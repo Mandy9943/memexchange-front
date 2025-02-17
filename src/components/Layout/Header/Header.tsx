@@ -6,7 +6,7 @@ export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
 
   return (
-    <div className='absolute top-0 left-0 flex justify-between items-center w-full px-5 py-10'>
+    <div className='absolute top-0 left-0 flex justify-between items-center w-full px-5 py-5'>
       <div className='flex items-center gap-4 w-full'>
         {isLoggedIn && (
           <div className='w-full flex justify-center'>
