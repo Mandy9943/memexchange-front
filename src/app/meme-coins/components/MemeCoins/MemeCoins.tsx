@@ -2,7 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { getBondingPairs } from '@/services/rest/backendApi/bonding-pair';
 import { BondingPair } from '@/types/bondingPairsTypes';
-import { Share } from 'lucide-react';
+import { formatAddress } from '@/utils/mx-utils';
+import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -35,6 +36,7 @@ function MemeCoins() {
       '_blank'
     );
   };
+  console.log(bondingPairs);
 
   return (
     <div className=''>
@@ -47,10 +49,10 @@ function MemeCoins() {
               <Link href={`/meme-coins/${coin.address}`} key={idx}>
                 <Card
                   key={idx}
-                  className='bg-neutral-800 border border-neutral-700 hover:border-neutral-600 p-3 sm:p-4  transition-all overflow-hidden'
+                  className='bg-neutral-800 border h-full border-neutral-700 hover:border-neutral-600 p-3 sm:p-4  transition-all overflow-hidden'
                 >
                   <div className='flex flex-col h-full'>
-                    <div className='flex gap-2 sm:gap-4'>
+                    <div className='flex gap-2 flex-1 sm:gap-4'>
                       {coin.coin && (
                         <Image
                           src={coin.coin?.imageUrl}
@@ -79,7 +81,7 @@ function MemeCoins() {
                                           href={word}
                                           target='_blank'
                                           rel='noopener noreferrer'
-                                          className='text-blue-400 hover:text-blue-300 hover:underline inline-block max-w-[100px] sm:max-w-[200px] truncate align-bottom'
+                                          className='text-blue-400 hover:text-blue-300 hover:underline inline-block break-all align-bottom mr-2'
                                           title={word}
                                           onClick={(e) => e.stopPropagation()}
                                         >
@@ -99,29 +101,40 @@ function MemeCoins() {
                             bondingAddress={coin.address}
                             isFinished={coin.state === 'Finished'}
                           />
-
-                          <p className='text-xs sm:text-sm text-muted-foreground break-all'>
-                            <span className='hidden sm:inline'>
-                              {coin.address}
-                            </span>
-                            <span className='sm:hidden'>
-                              {coin.address.substring(0, 8)}...
-                              {coin.address.substring(coin.address.length - 8)}
-                            </span>
-                          </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className='mt-2 flex justify-end'>
+                    <div className='mt-2 flex items-center justify-between text-xs border-t border-neutral-700 pt-2'>
+                      <div className='flex items-center gap-1.5 text-neutral-400'>
+                        <div className='w-5 h-5 rounded-full bg-neutral-700 flex items-center justify-center text-[10px]'>
+                          👤
+                        </div>
+                        <span className='hidden sm:inline'>
+                          {formatAddress(coin.creator.address)}
+                        </span>
+                        <span className='sm:hidden'>
+                          {formatAddress(coin.creator.address, 3, 5)}
+                        </span>
+                        <span className='text-neutral-500'>•</span>
+                        <span>
+                          {formatDistanceToNow(new Date(coin.createdAt))} ago
+                        </span>
+                      </div>
+
                       <Button
                         variant='ghost'
                         size='sm'
-                        className='text-neutral-400 hover:text-white hover:bg-neutral-600'
+                        className='text-neutral-400 hover:text-white hover:bg-neutral-600 h-7 px-2'
                         onClick={(e) => handleShare(e, coin)}
                       >
-                        <Share className='w-4 h-4 mr-2' />
-                        Share on X
+                        <svg
+                          viewBox='0 0 24 24'
+                          className='w-3.5 h-3.5 fill-current'
+                          aria-hidden='true'
+                        >
+                          <path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' />
+                        </svg>
                       </Button>
                     </div>
                   </div>
