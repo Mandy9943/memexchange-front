@@ -39,9 +39,10 @@ function MemeCoins() {
                     <Image
                       src={coin.coin?.imageUrl}
                       alt={coin.coin?.name}
-                      width={60}
-                      height={60}
+                      width={100}
+                      height={100}
                       className='w-[60px] h-[60px] sm:w-[100px] sm:h-[100px]'
+                      quality={100}
                     />
                   )}
                   <div className='flex flex-1 text-white flex-col'>
