@@ -83,10 +83,7 @@ export const TradeHistory = ({ tokenIdentifier }: TradeHistoryProps) => {
                   </a>
                 </td>
                 <td className='text-right py-3 px-4 whitespace-nowrap'>
-                  {formatNumber(trade.amount)}{' '}
-                  {trade.type === 'sell'
-                    ? 'WEGLD'
-                    : formatTokenI(tokenIdentifier)}
+                  {formatNumber(trade.amount)} {formatTokenI(tokenIdentifier)}
                 </td>
                 <td className='text-right py-3 px-4 text-gray-400 whitespace-nowrap'>
                   {formatDistanceToNow(new Date(trade.timestamp * 1000), {
