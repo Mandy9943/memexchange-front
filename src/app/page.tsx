@@ -44,6 +44,31 @@ export default function LandingPage() {
                 Launch Coin
               </Link>
             </div>
+            {/* Add social links */}
+            <div className='flex gap-4 mt-6'>
+              <a
+                href='https://x.com/mem_exchange'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-gray-300 hover:text-green-400 transition-colors flex items-center gap-2'
+              >
+                <svg viewBox='0 0 24 24' className='h-5 w-5 fill-current'>
+                  <path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' />
+                </svg>
+                <span>Twitter</span>
+              </a>
+              <a
+                href='https://t.me/mem_exchange'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-gray-300 hover:text-green-400 transition-colors flex items-center gap-2'
+              >
+                <svg viewBox='0 0 24 24' className='h-5 w-5 fill-current'>
+                  <path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.29-.48.79-.74 3.08-1.34 5.15-2.23 6.19-2.66 2.95-1.23 3.56-1.44 3.97-1.45.09 0 .28.02.41.12.11.08.18.21.2.34.02.12.02.24.01.36z' />
+                </svg>
+                <span>Telegram</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
