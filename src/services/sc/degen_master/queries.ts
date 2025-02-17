@@ -22,9 +22,7 @@ export const fetchAllBondingData = async () => {
   }
 
   const rawData = res.firstValue.valueOf() as ISCBoundingData[];
-  console.log(rawData);
   const data = adaptAllBondingData(rawData);
-  console.log(data);
 
   return data;
 };

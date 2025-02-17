@@ -5,22 +5,22 @@ import { useBondingPair } from '@/hooks/useBondingPair';
 import { fetchAllBondingData } from '@/services/sc/degen_master/queries';
 import { formatTokenI } from '@/utils/mx-utils';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import BondingCurveProgress from '../components/MemeCoins/components/BondingCurveProgress';
 import MarketCap from '../components/MemeCoins/components/MarketCap';
 import HoldersList from './components/HoldersList/HoldersList';
 import LoadingSkeleton from './components/LoadingEffect';
+import { TradeHistory } from './components/TradeHistory';
 import { Trading } from './components/Trading';
 import { TradingChart } from './components/TradingChart';
 
 const CoinPage = () => {
   const { address } = useParams();
   const bondingAddress = address as string;
-  console.log(bondingAddress);
 
   const { bondingPair } = useBondingPair(bondingAddress);
-  console.log(bondingPair);
 
   const { data: bondingData, isLoading } = useSWR(
     'master:getAllBondingData',
@@ -30,6 +30,8 @@ const CoinPage = () => {
   const scBondingPair = bondingData?.find(
     (bonding) => bonding.address === bondingAddress
   );
+
+  const [activeTab, setActiveTab] = useState('trades');
 
   if (isLoading) {
     return <LoadingSkeleton />;
@@ -60,10 +62,39 @@ const CoinPage = () => {
             <div className='lg:col-span-2 bg-gray-800 rounded-lg p-4 flex flex-col gap-4'>
               <TradingChart tokenIdentifier={bondingPair?.firstToken} />
 
-              <HoldersList
-                tokenIdentifier={scBondingPair.firstTokenId}
-                contractAddress={bondingAddress}
-              />
+              <div className='flex flex-col gap-4'>
+                <div className='flex gap-2 border-b border-gray-700'>
+                  <button
+                    onClick={() => setActiveTab('trades')}
+                    className={`px-4 py-2 font-medium ${
+                      activeTab === 'trades'
+                        ? 'text-blue-400 border-b-2 border-blue-400'
+                        : 'text-gray-400 hover:text-gray-300'
+                    }`}
+                  >
+                    Trade History
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('holders')}
+                    className={`px-4 py-2 font-medium ${
+                      activeTab === 'holders'
+                        ? 'text-blue-400 border-b-2 border-blue-400'
+                        : 'text-gray-400 hover:text-gray-300'
+                    }`}
+                  >
+                    Holders
+                  </button>
+                </div>
+
+                {activeTab === 'trades' ? (
+                  <TradeHistory tokenIdentifier={bondingPair.firstToken} />
+                ) : (
+                  <HoldersList
+                    tokenIdentifier={scBondingPair.firstTokenId}
+                    contractAddress={bondingAddress}
+                  />
+                )}
+              </div>
             </div>
           )}
 
