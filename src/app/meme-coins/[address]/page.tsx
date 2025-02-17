@@ -85,8 +85,26 @@ const CoinPage = () => {
                     {formatTokenI(scBondingPair.firstTokenId)}
                   </h1>
                   {bondingPair?.coin?.description && (
-                    <p className='text-gray-400 text-sm mt-2 max-w-md mx-auto'>
-                      {bondingPair.coin.description}
+                    <p className='text-gray-400 text-sm mt-2 max-w-md mx-auto break-words'>
+                      {bondingPair.coin.description
+                        .split(/\s+/)
+                        .map((word, index) => {
+                          if (word.match(/^(https?:\/\/[^\s]+)/)) {
+                            return (
+                              <a
+                                key={index}
+                                href={word}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='text-blue-400 hover:text-blue-300 hover:underline inline-block max-w-[200px] truncate align-bottom'
+                                title={word}
+                              >
+                                {word}{' '}
+                              </a>
+                            );
+                          }
+                          return word + ' ';
+                        })}
                     </p>
                   )}
                 </div>
@@ -98,13 +116,14 @@ const CoinPage = () => {
                 isFinished={bondingPair?.state === 'Finished'}
               />
               <div
-                className='text-sm text-green-400 flex gap-2 cursor-pointer'
+                className='text-sm text-green-400 flex gap-2 cursor-pointer overflow-hidden'
                 onClick={() => {
                   navigator.clipboard.writeText(address as string);
                   toast.success('Address copied to clipboard!');
                 }}
               >
-                Address: <span className='line-clamp-1'>{address}</span>
+                <span className='flex-shrink-0'>Address:</span>
+                <span className='truncate'>{address}</span>
               </div>
             </div>
 
