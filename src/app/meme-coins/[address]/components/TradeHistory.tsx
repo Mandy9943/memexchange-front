@@ -1,7 +1,8 @@
 'use client';
 
+import { network } from '@/config';
 import { getTokenTrades } from '@/services/rest/backendApi/swap';
-import { formatAddress, formatNumber } from '@/utils/mx-utils';
+import { formatAddress, formatNumber, formatTokenI } from '@/utils/mx-utils';
 import { formatDistanceToNow } from 'date-fns';
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -47,22 +48,19 @@ export const TradeHistory = ({ tokenIdentifier }: TradeHistoryProps) => {
     <div className='bg-gray-800 rounded-lg p-4'>
       <h2 className='text-xl font-semibold mb-4'>Recent Trades</h2>
       <div className='overflow-x-auto'>
-        <table className='min-w-full'>
+        <table className='min-w-full table-auto whitespace-nowrap'>
           <thead>
             <tr className='text-gray-400 text-sm'>
-              <th className='text-left py-2 px-4'>Type</th>
-              <th className='text-left py-2 px-4'>Address</th>
-              <th className='text-right py-2 px-4'>Amount</th>
-              <th className='text-right py-2 px-4'>Time</th>
+              <th className='text-left py-2 px-4 whitespace-nowrap'>Type</th>
+              <th className='text-left py-2 px-4 whitespace-nowrap'>User</th>
+              <th className='text-right py-2 px-4 whitespace-nowrap'>Amount</th>
+              <th className='text-right py-2 px-4 whitespace-nowrap'>Time</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='divide-y divide-gray-700'>
             {trades.map((trade, index) => (
-              <tr
-                key={index}
-                className='border-t border-gray-700 hover:bg-gray-700/50'
-              >
-                <td className='py-3 px-4'>
+              <tr key={index} className='hover:bg-gray-700/50'>
+                <td className='py-3 px-4 whitespace-nowrap'>
                   <span
                     className={`inline-block px-3 py-1 rounded text-sm ${
                       trade.type === 'buy'
@@ -73,15 +71,24 @@ export const TradeHistory = ({ tokenIdentifier }: TradeHistoryProps) => {
                     {trade.type.toUpperCase()}
                   </span>
                 </td>
-                <td className='py-3 px-4'>
-                  <span className='text-gray-400'>
-                    {formatAddress(trade.address)}
-                  </span>
+                <td className='py-3 px-4 whitespace-nowrap'>
+                  <a
+                    href={`${network.explorerAddress}/accounts/${trade.address}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <span className='text-blue-400 hover:text-blue-300'>
+                      {formatAddress(trade.address)}
+                    </span>
+                  </a>
                 </td>
-                <td className='text-right py-3 px-4'>
-                  {formatNumber(trade.amount)}
+                <td className='text-right py-3 px-4 whitespace-nowrap'>
+                  {formatNumber(trade.amount)}{' '}
+                  {trade.type === 'sell'
+                    ? 'WEGLD'
+                    : formatTokenI(tokenIdentifier)}
                 </td>
-                <td className='text-right py-3 px-4 text-gray-400'>
+                <td className='text-right py-3 px-4 text-gray-400 whitespace-nowrap'>
                   {formatDistanceToNow(new Date(trade.timestamp * 1000), {
                     addSuffix: true
                   })}
