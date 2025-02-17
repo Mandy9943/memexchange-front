@@ -10,10 +10,12 @@ import useSWR from 'swr';
 
 const BondingCurveProgress = ({
   bondingAddress,
-  isFinished
+  isFinished,
+  removeText = false
 }: {
   bondingAddress: string;
   isFinished: boolean;
+  removeText?: boolean;
 }) => {
   const {
     data: maxSecondTokenReserveReq,
@@ -54,9 +56,11 @@ const BondingCurveProgress = ({
   return (
     <>
       <div className='w-full'>
-        <p className='text-xs text-muted-foreground mb-1'>
-          Bonding curve: {progressValue.toLocaleString()}%
-        </p>
+        {!removeText && (
+          <p className='text-xs text-muted-foreground mb-1'>
+            Bonding curve: {progressValue.toLocaleString()}%
+          </p>
+        )}
         <Progress value={progressValue} className='bg-neutral-700/50 mb-2' />
       </div>
     </>
