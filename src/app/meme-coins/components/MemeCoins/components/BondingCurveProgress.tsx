@@ -53,7 +53,7 @@ const BondingCurveProgress = ({
   const progressValue = progress > 100 || isFinished ? 100 : progress;
   return (
     <>
-      <div>
+      <div className='w-full'>
         <p className='text-xs text-muted-foreground mb-1'>
           Bonding curve: {progressValue.toLocaleString()}%
         </p>
