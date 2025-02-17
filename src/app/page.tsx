@@ -159,7 +159,7 @@ const features = [
     icon: '🔄',
     title: 'Automated Liquidity',
     description:
-      'When tokens reach $4,000 market cap, liquidity automatically flows to xExchange for enhanced trading',
+      'When the pool reaches 25 EGLD (guaranteeing the minimum 20 EGLD required by xExchange), liquidity automatically flows to xExchange for enhanced trading',
     link: 'https://xexchange.com/trade'
   },
   {

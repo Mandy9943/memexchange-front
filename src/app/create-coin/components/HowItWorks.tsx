@@ -78,8 +78,8 @@ const HowItWorks = () => {
                   section
                 </li>
                 <li>
-                  After migration to xExchange (at $4000 market cap), you can
-                  brand your token on{' '}
+                  After migration to xExchange (when pool reaches 25 EGLD), you
+                  can brand your token on{' '}
                   <a
                     href='https://mvxbrand.fun/'
                     target='_blank'
