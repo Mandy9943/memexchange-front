@@ -1,46 +1,42 @@
 'use client';
 
 import { useDropzone } from '@uploadthing/react';
-import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useCallback, useEffect } from 'react';
 import {
   generateClientDropzoneAccept,
   generatePermittedFileTypes
 } from 'uploadthing/client';
 
-import { useUploadThing } from '@/utils/uploadthing';
-import Image from 'next/image';
 interface CoinUploaderProps {
   onUploadComplete: (url: string) => void;
   initialPreview?: string;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
+  preview: string | null;
+  setPreview: (preview: string | null) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  startUpload: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  routeConfig: any;
 }
-function CoinUploader({ onUploadComplete, initialPreview }: CoinUploaderProps) {
-  const [preview, setPreview] = useState<string | null>(initialPreview || null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const { startUpload, routeConfig } = useUploadThing('imageUploader', {
-    onClientUploadComplete: (res) => {
-      if (res && res[0]) {
-        onUploadComplete(res[0].url);
-      }
-      setIsLoading(false);
-    },
-    onUploadError: () => {
-      alert('error occurred while uploading');
-      setPreview(null);
-      setIsLoading(false);
-    },
-    onUploadBegin: () => {
-      setIsLoading(true);
-    }
-  });
-
+function CoinUploader({
+  initialPreview,
+  isLoading,
+  setIsLoading,
+  preview,
+  setPreview,
+  startUpload,
+  routeConfig
+}: CoinUploaderProps) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       setPreview(URL.createObjectURL(acceptedFiles[0]));
       setIsLoading(true);
       startUpload(acceptedFiles);
     },
-    [startUpload]
+    [startUpload, setPreview, setIsLoading]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -54,7 +50,7 @@ function CoinUploader({ onUploadComplete, initialPreview }: CoinUploaderProps) {
     if (initialPreview) {
       setPreview(initialPreview);
     }
-  }, [initialPreview]);
+  }, [initialPreview, setPreview]);
 
   return (
     <div

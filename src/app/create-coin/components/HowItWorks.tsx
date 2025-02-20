@@ -6,7 +6,7 @@ const HowItWorks = () => {
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   return (
-    <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mb-3 md:mb-4'>
+    <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mt-3 md:mt-4'>
       <CardHeader
         className='cursor-pointer flex flex-row items-center justify-between p-3 md:p-4'
         onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
@@ -28,18 +28,29 @@ const HowItWorks = () => {
               <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 1
               </span>
-              <p className='text-sm md:text-base'>
-                Fill out the form with your memecoin details and choose if you
-                want to be the first buyer.
-              </p>
+              <div className='text-sm md:text-base'>
+                <p className='mb-2'>
+                  Choose how you want to create your memecoin:
+                </p>
+                <ul className='list-disc list-inside ml-4 space-y-1'>
+                  <li>
+                    Use AI Generator (3 free generations per day): One-click
+                    random generation or customize with your prompt
+                  </li>
+                  <li>
+                    Manual Creation: Fill out the form with your memecoin
+                    details
+                  </li>
+                </ul>
+              </div>
             </div>
             <div className='flex items-start gap-2 md:gap-3'>
               <span className='bg-green-500 text-white w-5 h-5 md:w-6 md:h-6 flex justify-center items-center rounded-full text-xs md:text-sm shrink-0'>
                 2
               </span>
               <p className='text-sm md:text-base'>
-                Click &quot;Launch Memecoin&quot; button and pay 0.1 EGLD
-                (one-time payment).
+                Choose if you want to be the first buyer, then click
+                &quot;Launch Memecoin&quot; and pay 0.1 EGLD (one-time payment).
               </p>
             </div>
             <div className='flex items-start gap-2 md:gap-3'>

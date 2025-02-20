@@ -3,14 +3,25 @@
 import { RequireAuth } from '@/components/ConnectButton/RequireAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog';
+import { aiGenerationService } from '@/services/rest/backendApi/ai-generation';
 import { fetchTransactionByHash } from '@/services/rest/elrond/transactions';
 import { issueLpToken, setLocalRoles } from '@/services/sc/bonding/call';
 import { createCoin } from '@/services/sc/degen_master/calls';
 import { Address } from '@/utils';
+import { useUploadThing } from '@/utils/uploadthing';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTrackTransactionStatus } from '@multiversx/sdk-dapp/hooks';
+import Cookies from 'js-cookie';
+import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useSWR from 'swr';
 import * as z from 'zod';
 import CoinUploader from './components/CoinUploader';
 import HowItWorks from './components/HowItWorks';
@@ -79,6 +90,37 @@ const Page = () => {
   });
 
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [showAIDialog, setShowAIDialog] = useState(false);
+  const [generationStep, setGenerationStep] = useState<
+    'prompt' | 'generating' | 'result' | 'error'
+  >('prompt');
+  const [customPrompt, setCustomPrompt] = useState('');
+  const { data: remainingGenerations } = useSWR(
+    '/api/ai-generation/remaining-generations',
+    () =>
+      aiGenerationService.getRemainingGenerations(Cookies.get('auth-token')!)
+  );
+
+  console.log(remainingGenerations);
+
+  const { startUpload, routeConfig } = useUploadThing('imageUploader', {
+    onClientUploadComplete: (res) => {
+      if (res && res[0]) {
+        onUploadComplete(res[0].url);
+      }
+      setIsLoading(false);
+    },
+    onUploadError: () => {
+      alert('error occurred while uploading');
+      setPreview(null);
+      setIsLoading(false);
+    },
+    onUploadBegin: () => {
+      setIsLoading(true);
+    }
+  });
 
   // Load saved data on component mount
   useEffect(() => {
@@ -163,9 +205,260 @@ const Page = () => {
     onSuccess: onSuccessTx
   });
 
+  const onUploadComplete = (url: string) => {
+    setValue('imageUrl', url);
+  };
+
+  const uploadBase64Image = async (base64Data: string) => {
+    // Convert base64 to blob
+    const response = await fetch(base64Data);
+    const blob = await response.blob();
+
+    // Create a File object
+    const file = new File([blob], 'generated-coin.png', { type: 'image/png' });
+
+    // Use the same upload thing instance as CoinUploader
+    const uploadResponse = await startUpload([file]);
+
+    if (uploadResponse && uploadResponse[0]) {
+      return uploadResponse[0].url;
+    }
+    throw new Error('Upload failed');
+  };
+
+  const handleGenerateCoin = async (customPrompt?: string) => {
+    if (!remainingGenerations || remainingGenerations <= 0) {
+      setGenerationStep('error');
+      return;
+    }
+
+    try {
+      setGenerationStep('generating');
+      const authToken = Cookies.get('auth-token');
+      const coin = await aiGenerationService.generateCoin(
+        authToken!,
+        customPrompt!
+      );
+      console.log(coin);
+
+      // Upload the image and get the URL
+      const imageUrl = await uploadBase64Image(coin.image);
+
+      // Set form values
+      setValue('name', coin.name);
+      setValue('symbol', coin.symbol);
+      setValue('description', coin.description);
+      setValue('imageUrl', imageUrl);
+
+      setGenerationStep('result');
+    } catch (error) {
+      setGenerationStep('error');
+      console.error('Error generating coin:', error);
+    }
+  };
+
+  const handleOpenAIDialog = () => {
+    setGenerationStep('prompt');
+    setShowAIDialog(true);
+  };
+
   return (
     <div className='w-full px-4 py-4 md:py-8'>
-      <HowItWorks />
+      <div className='max-w-6xl mx-auto mb-6 flex flex-col items-center gap-4 px-4'>
+        <RequireAuth onClick={handleOpenAIDialog}>
+          <Button
+            variant='outline'
+            className='group relative overflow-hidden px-5 py-2.5 
+            bg-gradient-to-r from-[#1a1f2c] to-[#1e2433] 
+            border border-green-500/30 text-green-400 
+            hover:border-green-400/50 hover:text-green-300 
+            transition-all duration-300 ease-out
+            rounded-full text-sm sm:text-base flex items-center gap-2.5 
+            shadow-lg shadow-black/20 hover:shadow-green-500/50
+            animate-pulse-subtle
+            before:absolute before:inset-0 
+            before:bg-gradient-to-r before:from-green-500/0 before:via-green-500/10 before:to-green-500/0
+            before:animate-glow-horizontal
+            after:absolute after:inset-0 
+            after:bg-gradient-to-b after:from-green-500/0 after:via-green-500/10 after:to-green-500/0
+            after:animate-glow-vertical'
+          >
+            <span
+              className='text-xl group-hover:scale-110 transition-transform duration-300 
+              animate-float'
+            >
+              🤖
+            </span>
+            <span className='font-medium relative z-10'>AI Coin Generator</span>
+            <span className='text-xs opacity-75 border-l border-green-500/20 pl-2.5 ml-1 relative z-10'>
+              {remainingGenerations ?? '...'} left
+            </span>
+            <div
+              className='absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent 
+            transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000'
+            />
+          </Button>
+        </RequireAuth>
+      </div>
+
+      <style jsx global>{`
+        @keyframes glow-horizontal {
+          0%,
+          100% {
+            transform: translateX(-100%);
+          }
+          50% {
+            transform: translateX(100%);
+          }
+        }
+
+        @keyframes glow-vertical {
+          0%,
+          100% {
+            transform: translateY(-100%);
+          }
+          50% {
+            transform: translateY(100%);
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+
+        @keyframes pulse-subtle {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.95;
+          }
+        }
+
+        .animate-glow-horizontal {
+          animation: glow-horizontal 3s infinite;
+        }
+
+        .animate-glow-vertical {
+          animation: glow-vertical 3s infinite;
+        }
+
+        .animate-float {
+          animation: float 2s ease-in-out infinite;
+        }
+
+        .animate-pulse-subtle {
+          animation: pulse-subtle 2s ease-in-out infinite;
+        }
+      `}</style>
+
+      <Dialog open={showAIDialog} onOpenChange={setShowAIDialog}>
+        <DialogContent className='bg-[#1e222d] text-white max-w-[90vw] sm:max-w-2xl  p-4 sm:p-6'>
+          <DialogHeader>
+            <DialogTitle className='text-lg sm:text-xl text-center'>
+              AI Coin Generator
+            </DialogTitle>
+          </DialogHeader>
+
+          {generationStep === 'prompt' && (
+            <div className='space-y-4'>
+              <div className='space-y-2'>
+                <label className='text-sm sm:text-base text-gray-300'>
+                  Custom Prompt (Optional)
+                </label>
+                <textarea
+                  className='w-full bg-[#2a2f3b] text-white p-2.5 sm:p-3 rounded-md text-sm sm:text-base'
+                  placeholder='Describe your coin idea... (or leave empty for random generation)'
+                  value={customPrompt}
+                  onChange={(e) => setCustomPrompt(e.target.value)}
+                  rows={3}
+                />
+              </div>
+
+              <div className='flex flex-col sm:flex-row gap-3'>
+                <Button
+                  className='flex-1 bg-green-500 hover:bg-green-600 text-sm sm:text-base'
+                  onClick={() => handleGenerateCoin(customPrompt)}
+                >
+                  {customPrompt ? 'Generate with Prompt' : 'Random Generation'}
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {generationStep === 'generating' && (
+            <div className='py-6 sm:py-8 flex flex-col items-center gap-4'>
+              <Loader2 className='h-6 w-6 sm:h-8 sm:w-8 animate-spin text-green-500' />
+              <p className='text-gray-300 text-sm sm:text-base text-center'>
+                Creating your memecoin masterpiece...
+              </p>
+            </div>
+          )}
+
+          {generationStep === 'result' && (
+            <div className='space-y-4'>
+              <div className='flex justify-center'>
+                <img
+                  src={watch('imageUrl')}
+                  alt='Generated coin'
+                  className='w-24 h-24 sm:w-32 sm:h-32 rounded-full'
+                />
+              </div>
+              <div className='space-y-2 text-center'>
+                <p className='text-base sm:text-lg font-bold'>
+                  {watch('name')} ({watch('symbol')})
+                </p>
+                <p className='text-gray-300 text-sm sm:text-base'>
+                  {watch('description')}
+                </p>
+              </div>
+              <div className='flex flex-col sm:flex-row gap-3'>
+                <Button
+                  className='flex-1 bg-green-500 hover:bg-green-600 text-sm sm:text-base'
+                  onClick={() => setShowAIDialog(false)}
+                >
+                  Use This Coin
+                </Button>
+                <Button
+                  variant='outline'
+                  className='flex-1 border-green-500 text-green-500 hover:bg-green-300 text-sm sm:text-base'
+                  onClick={() => {
+                    setGenerationStep('prompt');
+                    setCustomPrompt('');
+                  }}
+                >
+                  Generate Another
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {generationStep === 'error' && (
+            <div className='space-y-4'>
+              <p className='text-red-500 text-sm sm:text-base text-center'>
+                {!remainingGenerations || remainingGenerations <= 0
+                  ? "You've used all your available generations for today. Generations reset daily - try again tomorrow!"
+                  : 'Error generating coin. Please try again.'}
+              </p>
+              <Button
+                variant='outline'
+                className='w-full border-red-500 text-red-500 hover:bg-red-500/20'
+                onClick={() => setShowAIDialog(false)}
+              >
+                Close
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full'>
         <CardHeader className='p-4 md:p-6'>
           <CardTitle className='text-white text-center text-xl md:text-2xl'>
@@ -181,8 +474,14 @@ const Page = () => {
             <div className='space-y-3 md:space-y-4'>
               <div className='flex justify-center mb-4 md:mb-6'>
                 <CoinUploader
-                  onUploadComplete={(url) => setValue('imageUrl', url)}
+                  onUploadComplete={onUploadComplete}
                   initialPreview={watch('imageUrl')}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                  preview={preview}
+                  setPreview={setPreview}
+                  startUpload={startUpload}
+                  routeConfig={routeConfig}
                 />
               </div>
               {errors.imageUrl && (
@@ -302,6 +601,8 @@ const Page = () => {
           3. Enable Transactions
         </Button>
       </Card>
+
+      <HowItWorks />
     </div>
   );
 };
