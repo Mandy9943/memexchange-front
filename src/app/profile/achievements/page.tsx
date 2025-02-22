@@ -16,7 +16,7 @@ export default function AchievementsPage() {
   return (
     <PageWrapper>
       <div className='container mx-auto px-4 py-8'>
-        <div className='mb-8'>
+        <div className='mb-8 text-center'>
           <h1 className='text-3xl font-bold mb-2'>My Achievements</h1>
           <p className='text-neutral-400'>
             Complete tasks to earn points and unlock rewards

@@ -465,7 +465,7 @@ const Page = () => {
         </DialogContent>
       </Dialog>
 
-      <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full'>
+      <Card className='max-w-6xl mx-auto bg-neutral-800 w-full'>
         <CardHeader className='p-4 md:p-6'>
           <CardTitle className='text-white text-center text-xl md:text-2xl'>
             Launch new coin
@@ -504,7 +504,7 @@ const Page = () => {
                   {...register('name')}
                   type='text'
                   placeholder='Enter coin name'
-                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
+                  className='w-full bg-neutral-900 text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
                 />
                 {errors.name && (
                   <p className='text-red-500 text-xs md:text-sm mt-1'>
@@ -521,7 +521,7 @@ const Page = () => {
                   {...register('symbol')}
                   type='text'
                   placeholder='Enter coin symbol'
-                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
+                  className='w-full bg-neutral-900 text-white p-2.5 md:p-3 rounded-md text-sm md:text-base'
                 />
                 {errors.symbol && (
                   <p className='text-red-500 text-xs md:text-sm mt-1'>
@@ -537,7 +537,7 @@ const Page = () => {
                 <textarea
                   {...register('description')}
                   placeholder='Enter description here...'
-                  className='w-full bg-[#2a2f3b] text-white p-2.5 md:p-3 rounded-md min-h-[120px] md:min-h-[200px] text-sm md:text-base'
+                  className='w-full bg-neutral-900 text-white p-2.5 md:p-3 rounded-md min-h-[120px] md:min-h-[200px] text-sm md:text-base'
                 />
                 {errors.description && (
                   <p className='text-red-500 text-xs md:text-sm mt-1'>
@@ -585,7 +585,7 @@ const Page = () => {
         </CardContent>
       </Card>
 
-      <Card className='w-full max-w-6xl mx-auto bg-[#1e222d] mt-4 py-6 md:py-10 flex flex-col items-center gap-3 md:gap-4 px-4 md:px-6'>
+      <Card className='w-full max-w-6xl mx-auto bg-neutral-800 mt-4 py-6 md:py-10 flex flex-col items-center gap-3 md:gap-4 px-4 md:px-6'>
         <Button
           type='button'
           className='w-full max-w-xl mx-auto bg-teal-500 text-white p-2.5 md:p-3 rounded-md hover:bg-teal-600 transition-colors text-sm md:text-base'

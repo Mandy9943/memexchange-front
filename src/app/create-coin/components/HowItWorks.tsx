@@ -8,7 +8,7 @@ const HowItWorks = () => {
   const { newTokenFeeString } = useNewTokenFee();
 
   return (
-    <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mt-3 md:mt-4'>
+    <Card className='max-w-6xl mx-auto bg-neutral-800 w-full mt-3 md:mt-4'>
       <CardHeader
         className='cursor-pointer flex flex-row items-center justify-between p-3 md:p-4'
         onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
