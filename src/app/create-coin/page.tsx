@@ -9,11 +9,14 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
+import useReferral from '@/hooks/useReferral';
 import { aiGenerationService } from '@/services/rest/backendApi/ai-generation';
 import { fetchTransactionByHash } from '@/services/rest/elrond/transactions';
 import { issueLpToken, setLocalRoles } from '@/services/sc/bonding/call';
 import { createCoin } from '@/services/sc/degen_master/calls';
+import { fetchNewTokenFee } from '@/services/sc/degen_master/queries';
 import { Address } from '@/utils';
+import { formatBalance } from '@/utils/mx-utils';
 import { useUploadThing } from '@/utils/uploadthing';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTrackTransactionStatus } from '@multiversx/sdk-dapp/hooks';
@@ -102,8 +105,11 @@ const Page = () => {
     () =>
       aiGenerationService.getRemainingGenerations(Cookies.get('auth-token')!)
   );
-
-  console.log(remainingGenerations);
+  const { referrerAddress } = useReferral();
+  const { data: newTokenFee } = useSWR(
+    'master:getNewTokenFee',
+    fetchNewTokenFee
+  );
 
   const { startUpload, routeConfig } = useUploadThing('imageUploader', {
     onClientUploadComplete: (res) => {
@@ -141,7 +147,7 @@ const Page = () => {
   }, [watch]);
 
   const onSubmit = async (data: FormData) => {
-    const res = await createCoin(data, 0.1);
+    const res = await createCoin(data, newTokenFee, referrerAddress);
     setSessionId(res.sessionId);
     // After successful submission
     clearFormData();
@@ -558,7 +564,12 @@ const Page = () => {
               </div>
 
               <p className='text-gray-400 text-center text-xs md:text-sm'>
-                Cost of launching a memecoin is 0.1 EGLD
+                Cost of launching a memecoin is{' '}
+                {formatBalance({
+                  balance: newTokenFee,
+                  decimals: 18
+                })}{' '}
+                EGLD
               </p>
 
               <RequireAuth onClick={handleSubmit(onSubmit)}>

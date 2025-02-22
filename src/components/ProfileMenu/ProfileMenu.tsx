@@ -10,7 +10,7 @@ import { network } from '@/config';
 import { logout } from '@/helpers';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
-import { CircleUser, Coins, LogOut, Medal, Shield } from 'lucide-react';
+import { CircleUser, Coins, LogOut, Medal, Shield, Users } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 
@@ -53,6 +53,12 @@ export const ProfileMenu = () => {
           <Link href='/profile/tokens' className='flex items-center gap-2'>
             <Coins className='h-4 w-4' />
             <span>My Tokens</span>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href='/profile/referrals' className='flex items-center gap-2'>
+            <Users className='h-4 w-4' />
+            <span>Referrals</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

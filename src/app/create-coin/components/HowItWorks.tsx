@@ -1,9 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import useNewTokenFee from '@/hooks/useNewTokenFee';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 
 const HowItWorks = () => {
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
+  const { newTokenFeeString } = useNewTokenFee();
 
   return (
     <Card className='max-w-6xl mx-auto bg-[#1e222d] w-full mt-3 md:mt-4'>
@@ -50,7 +52,8 @@ const HowItWorks = () => {
               </span>
               <p className='text-sm md:text-base'>
                 Choose if you want to be the first buyer, then click
-                &quot;Launch Memecoin&quot; and pay 0.1 EGLD (one-time payment).
+                &quot;Launch Memecoin&quot; and pay {newTokenFeeString} EGLD
+                (one-time payment).
               </p>
             </div>
             <div className='flex items-start gap-2 md:gap-3'>

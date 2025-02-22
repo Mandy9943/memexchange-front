@@ -21,3 +21,6 @@ export const BATCH_TRANSACTIONS_SC = {
     data: 'ESDTTransfer@4D45582D613635396430@0de0b6b3a7640000@6c6f636b546f6b656e73@05a0'
   }
 };
+
+export const adminAddress =
+  'erd1km36e8ltqp487ahnr6ume35qmsekkzc2gxxyu03alrrs9kgtpl6sflyqer';

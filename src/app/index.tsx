@@ -14,6 +14,7 @@ import {
   sampleAuthenticatedDomains,
   walletConnectV2ProjectId
 } from '@/config';
+import useReferral from '@/hooks/useReferral';
 import { RouteNamesEnum } from '@/localConstants';
 import store from '@/redux/store';
 import { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext';
@@ -21,6 +22,7 @@ import type { PropsWithChildren, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
 const AppContent = ({ children }: PropsWithChildren) => {
+  useReferral();
   return (
     <DappProvider
       environment={environment}

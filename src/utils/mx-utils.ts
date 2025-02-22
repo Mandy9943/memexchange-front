@@ -1,3 +1,4 @@
+import { Address } from '@multiversx/sdk-core/out';
 import BigNumber from 'bignumber.js';
 import { numberWithCommas, preventExponetialNotation } from './numbers';
 
@@ -169,4 +170,8 @@ export const calculateSlippageAmount = (
   const finalAmount = new BigNumber(aproxAmount).minus(amountWithSlipage);
 
   return finalAmount;
+};
+
+export const isValidAddress = (address: string) => {
+  return Address.isValid(address);
 };

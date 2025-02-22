@@ -1,7 +1,11 @@
+import { Skeleton } from '@/components/ui/skeleton';
+import useNewTokenFee from '@/hooks/useNewTokenFee';
 import { RouteNamesEnum } from '@/localConstants';
 import Link from 'next/link';
 
 const Header = () => {
+  const { newTokenFeeString, isLoading } = useNewTokenFee();
+
   return (
     <>
       <div className='flex items-center mb-4'>
@@ -10,11 +14,15 @@ const Header = () => {
         </h2>
       </div>
 
-      <Link href={RouteNamesEnum.createCoin} className='hover:underline'>
-        <p className='text-green-400 mb-4 text-center'>
-          Create your meme coin just for 0.1 EGLD
-        </p>
-      </Link>
+      {isLoading ? (
+        <Skeleton className='w-full h-5 bg-gray-700 max-w-[350px] mx-auto' />
+      ) : (
+        <Link href={RouteNamesEnum.createCoin} className='hover:underline'>
+          <p className='text-green-400 mb-4 text-center'>
+            Create your meme coin just for {newTokenFeeString} EGLD
+          </p>
+        </Link>
+      )}
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { adaptAllBondingData } from '@/adapters/master-sc';
 import { ISCBoundingData } from '@/types/masterScTypes';
+import { Address, AddressValue } from '@/utils';
 import BigNumber from 'bignumber.js';
 import { scQuery } from '../query';
 
@@ -36,4 +37,17 @@ export const fetchMaxSecondTokenReserve = async (): Promise<BigNumber> => {
   }
 
   return res.firstValue.valueOf() as BigNumber;
+};
+export const fetchReferrerUsers = async (
+  address: string
+): Promise<Address[]> => {
+  const res = await scQuery('master', 'getReferrerUsers', [
+    new AddressValue(new Address(address))
+  ]);
+
+  if (!res?.firstValue) {
+    return [];
+  }
+
+  return res.firstValue.valueOf() as Address[];
 };

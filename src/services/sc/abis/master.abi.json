@@ -112,6 +112,10 @@
                 {
                     "name": "token_image_url",
                     "type": "bytes"
+                },
+                {
+                    "name": "referral_address",
+                    "type": "Address"
                 }
             ],
             "outputs": []
@@ -379,6 +383,81 @@
                     "type": "Address"
                 }
             ]
+        },
+        {
+            "name": "getReferralAddresses",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "referral",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "getReferrerUsers",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "referrer",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "variadic<Address>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "getReferralEgldAmount",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "setReferralEgldAmount",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getReferralEgldAdminAmount",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "setReferralEgldAdminAmount",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
         },
         {
             "name": "getAllBondingMetadata",
