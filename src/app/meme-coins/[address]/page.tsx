@@ -36,6 +36,7 @@ const CoinPage = () => {
   if (isLoading) {
     return <LoadingSkeleton />;
   }
+  console.log(bondingPair);
 
   if (!scBondingPair) {
     return (
@@ -91,6 +92,7 @@ const CoinPage = () => {
                   <HoldersList
                     tokenIdentifier={scBondingPair.firstTokenId}
                     contractAddress={bondingAddress}
+                    dev={bondingPair.creator.address}
                   />
                 )}
               </div>

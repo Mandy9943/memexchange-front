@@ -9,10 +9,12 @@ import { getBalancePercentage } from './helper';
 
 const HoldersList = ({
   tokenIdentifier,
-  contractAddress
+  contractAddress,
+  dev
 }: {
   tokenIdentifier: string;
   contractAddress: string;
+  dev: string;
 }) => {
   const { data: holders } = useSWR<
     {
@@ -53,7 +55,8 @@ const HoldersList = ({
                   '(Bonding Curve)'
                 ) : (
                   <span className='truncate'>
-                    {formatAddress(h.address, 6, 4)}
+                    {formatAddress(h.address, 6, 4)}{' '}
+                    {h.address === dev && '(Dev)'}
                   </span>
                 )}
               </a>
