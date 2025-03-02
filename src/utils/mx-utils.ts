@@ -175,3 +175,7 @@ export const calculateSlippageAmount = (
 export const isValidAddress = (address: string) => {
   return Address.isValid(address);
 };
+
+export const timeStampToSeconds = (timestamp: number): number => {
+  return Number(new BigNumber(timestamp).dividedBy(1000).toFixed(0));
+};

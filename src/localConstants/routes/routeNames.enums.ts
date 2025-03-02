@@ -5,5 +5,10 @@ export enum RouteNamesEnum {
   adminRewards = '/admin/rewards',
   achievements = '/profile/achievements',
   tokens = '/profile/tokens',
-  rewards = '/rewards'
+  rewards = '/rewards',
+  herotag = '/tools/herotag',
+  xfees = '/tools/x-fees',
+  xstkRewards = '/tools/staking-providers-rewards',
+  xpayments = '/tools/x-payments',
+  raffle = '/tools/raffle'
 }
