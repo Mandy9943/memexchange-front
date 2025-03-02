@@ -26,7 +26,12 @@ const BondingCurveProgress = ({
 
   const { data: bondingData, isLoading: isLoadingBondingData } = useSWR(
     'master:getAllBondingData',
-    fetchAllBondingData
+    fetchAllBondingData,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false
+    }
   );
 
   const bondingPair = bondingData?.find(
