@@ -206,7 +206,8 @@ function MemeCoins() {
               onClick={toggleSearch}
             >
               <h2 className='text-base sm:text-lg font-bold text-white flex items-center ml-1'>
-                Discover Meme Coins
+                Explore More
+                <span className='ml-1'>🔥</span>
               </h2>
 
               <div className='flex items-center gap-1.5'>
@@ -276,7 +277,7 @@ function MemeCoins() {
                   <div className='flex-1 relative'>
                     <Input
                       type='text'
-                      placeholder='Search by name, address, or token...'
+                      placeholder='Search by name, address, or description...'
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className='bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 pr-8 h-8 text-sm rounded-md focus:ring-1 focus:ring-neutral-600 focus:border-neutral-600'
