@@ -385,7 +385,7 @@ function MemeCoins() {
                       {debouncedQuery && (
                         <span>
                           {' '}
-                          matching &quot;
+                          {' matching'} &quot;
                           <span className='text-neutral-300 font-medium'>
                             {debouncedQuery}
                           </span>

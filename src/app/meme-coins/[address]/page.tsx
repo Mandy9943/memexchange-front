@@ -36,7 +36,6 @@ const CoinPage = () => {
   if (isLoading) {
     return <LoadingSkeleton />;
   }
-  console.log(bondingPair);
 
   if (!scBondingPair) {
     return (

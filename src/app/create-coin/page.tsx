@@ -20,8 +20,10 @@ import { formatBalance } from '@/utils/mx-utils';
 import { useUploadThing } from '@/utils/uploadthing';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTrackTransactionStatus } from '@multiversx/sdk-dapp/hooks';
+import { saveAs } from 'file-saver';
 import Cookies from 'js-cookie';
-import { Loader2 } from 'lucide-react';
+import JSZip from 'jszip';
+import { Download, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
@@ -268,6 +270,39 @@ const Page = () => {
     setShowAIDialog(true);
   };
 
+  const handleDownloadCoin = async () => {
+    try {
+      // Create a new JSZip instance
+      const zip = new JSZip();
+
+      // Add the coin image to the zip
+      const imageResponse = await fetch(watch('imageUrl'));
+      const imageBlob = await imageResponse.blob();
+      zip.file(`${watch('symbol')}_image.png`, imageBlob);
+
+      // Create JSON with coin details
+      const coinData = {
+        name: watch('name'),
+        symbol: watch('symbol'),
+        description: watch('description')
+      };
+
+      // Add the JSON file to the zip
+      zip.file(
+        `${watch('symbol')}_details.json`,
+        JSON.stringify(coinData, null, 2)
+      );
+
+      // Generate the zip file
+      const content = await zip.generateAsync({ type: 'blob' });
+
+      // Save the zip file
+      saveAs(content, `${watch('symbol')}_coin.zip`);
+    } catch (error) {
+      console.error('Error downloading coin:', error);
+    }
+  };
+
   return (
     <div className='w-full px-4 py-4 md:py-8'>
       <div className='max-w-6xl mx-auto mb-6 flex flex-col items-center gap-4 px-4'>
@@ -443,6 +478,14 @@ const Page = () => {
                   Generate Another
                 </Button>
               </div>
+              <Button
+                variant='outline'
+                className='w-full border-blue-500 text-blue-500 hover:bg-blue-500/20 flex items-center justify-center gap-2 text-sm sm:text-base'
+                onClick={handleDownloadCoin}
+              >
+                <Download className='h-4 w-4' />
+                Download Coin Package
+              </Button>
             </div>
           )}
 
