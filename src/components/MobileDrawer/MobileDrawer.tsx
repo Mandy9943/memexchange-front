@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -6,9 +6,9 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
-import { PropsWithChildren } from "react";
+  DrawerTitle
+} from '@/components/ui/drawer';
+import { PropsWithChildren } from 'react';
 
 interface IProps {
   isOpen: boolean;
@@ -23,12 +23,12 @@ const MobileDrawer = ({
   children,
   onClose,
   description,
-  title,
+  title
 }: PropsWithChildren<IProps>) => {
   return (
     <Drawer onOpenChange={onOpenChange} open={isOpen}>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
+      <DrawerContent className='dark'>
+        <div className='mx-auto w-full max-w-sm'>
           <DrawerHeader>
             {title && <DrawerTitle>{title}</DrawerTitle>}
 
@@ -36,10 +36,10 @@ const MobileDrawer = ({
               <DrawerDescription>{description}</DrawerDescription>
             )}
           </DrawerHeader>
-          <div className="p-4 pb-0">{children}</div>
+          <div className='p-4 pb-0'>{children}</div>
           <DrawerFooter>
             <DrawerClose asChild>
-              <Button variant="outline" onClick={onClose}>
+              <Button variant='outline' onClick={onClose}>
                 Cancel
               </Button>
             </DrawerClose>

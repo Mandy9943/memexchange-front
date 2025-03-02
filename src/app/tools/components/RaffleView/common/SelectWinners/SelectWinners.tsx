@@ -212,7 +212,7 @@ export default function SelectWinners() {
             </div>
             <div className='flex space-x-3'>
               <Button
-                className='flex-1'
+                className='flex-1 bg-neutral-800'
                 variant='outline'
                 onClick={clearForm}
                 type='button'

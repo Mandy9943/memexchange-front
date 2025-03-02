@@ -6,7 +6,7 @@ import SelectWinners from './common/SelectWinners/SelectWinners';
 
 const RaffleView = () => {
   return (
-    <div className='w-full max-w-8xl mx-auto py-4 px-2 sm:py-6 sm:px-8'>
+    <div className='w-full max-w-8xl mx-auto py-4 px-2 sm:py-6 sm:px-8 dark'>
       <div className='flex flex-col items-center mt-5'>
         <PageHeaderHeading className='mb-6'>
           <span className={'gradienteTitle text-center'}>Raffle Draw</span>

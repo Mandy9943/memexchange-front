@@ -6,6 +6,7 @@ export enum RouteNamesEnum {
   achievements = '/profile/achievements',
   tokens = '/profile/tokens',
   rewards = '/rewards',
+  tools = '/tools',
   herotag = '/tools/herotag',
   xfees = '/tools/x-fees',
   xstkRewards = '/tools/staking-providers-rewards',
