@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
     images: [
       {
-        url: 'https://memexchange.fun/og-image.webp',
+        url: 'https://memexchange.fun/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MemExchange - MultiversX Meme Coin Trading Platform'
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: 'MemExchange - Trade Meme Coins on MultiversX',
     description:
       'Trade meme coins on MultiversX with MemExchange - featuring bonding curve mechanics, automated liquidity growth, and seamless DEX integration.',
-    images: ['https://memexchange.fun/og-image.webp']
+    images: ['https://memexchange.fun/og-image.png']
   },
   other: {
     'msapplication-TileColor': '#000000',
