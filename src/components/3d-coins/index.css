@@ -1,0 +1,317 @@
+.sidebarButton {
+  position: fixed;
+  bottom: 9px;
+  right: 15px;
+  z-index: 1000;
+  font-size: 24px;
+  opacity: 0.5;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  padding-top: 50px;
+  box-shadow: -3px 0 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+.sidebar .closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+}
+.sidebar .closeButton:hover {
+  color: #fff;
+}
+.sidebar h2 {
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  gap: 10px;
+}
+.sidebar ul li {
+  padding: 8px 15px;
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: #ccc;
+  border-bottom: 1px solid #303030;
+  display: flex;
+  align-items: center;
+}
+.sidebar ul li p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sidebar ul li:hover {
+  background-color: #2a2a2a;
+  cursor: pointer;
+}
+.sidebar ul li .thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 3px;
+  background-color: #2a2a2a;
+}
+.sidebar ul li:last-child {
+  border-bottom: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+* ::selection {
+  background: #fff;
+  color: #111;
+}
+
+:root {
+  background: #111;
+  color: #fff;
+  font-family: "Google Sans Display", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+li {
+  list-style: none;
+}
+
+input, textarea {
+  font-family: "Google Sans Display", sans-serif;
+  background: none;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  resize: none;
+  user-select: text;
+}
+input::placeholder, textarea::placeholder {
+  user-select: none;
+}
+
+select {
+  appearance: none;
+  font-family: inherit;
+  padding: 10px;
+  background: #111;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button {
+  font-family: "Google Sans Display", sans-serif;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+button:focus {
+  outline: none;
+}
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button .icon {
+  display: block;
+}
+
+.button {
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: 300;
+  line-height: 1;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  width: 100%;
+  margin: 0 auto;
+}
+footer .controls, footer input, footer .input {
+  max-width: 600px;
+  position: relative;
+}
+footer select {
+  font-size: 12px;
+  opacity: 0.5;
+}
+footer select:focus {
+  outline: none;
+}
+footer input {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: 100%;
+}
+footer .spinner, footer .clearButton {
+  position: absolute;
+  right: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+footer .spinner.active, footer .clearButton.active {
+  opacity: 0.8;
+}
+footer > div {
+  display: flex;
+  position: relative;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+footer > div button {
+  opacity: 0.5;
+}
+footer > div button.active {
+  opacity: 1;
+}
+
+.clearButton {
+  font-size: 30px;
+  top: 2px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  user-select: none;
+}
+.controls > div {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.controls > div:nth-child(2) {
+  flex: 3;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.controls label {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.controls label input {
+  accent-color: #fff;
+}
+
+.caption {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  width: fit-content;
+  max-width: 800px;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  margin-bottom: 10px;
+}
+.caption button {
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 20px;
+  padding: 4px;
+  border-radius: 100px;
+  opacity: 1;
+  width: 28px;
+  height: 28px;
+  aspect-ratio: 1;
+}
+.caption button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.caption button .icon {
+  color: #fff;
+}
+.caption button .spinner {
+  position: relative;
+  right: 2px;
+  scale: 0.6;
+}
+.caption:empty {
+  opacity: 0;
+}

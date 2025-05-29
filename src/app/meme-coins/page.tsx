@@ -1,12 +1,13 @@
 'use client';
-import MemeCoins from './components/MemeCoins/MemeCoins';
+
+import dynamic from 'next/dynamic';
+
+const Gallery3D = dynamic(() => import('@/components/3d-coins/Gallery3D'), {
+  ssr: false
+});
 
 const MemeCoinsPage = () => {
-  return (
-    <div className=' w-full max-w-8xl mx-auto py-4 px-2 sm:py-6 sm:px-8'>
-      <MemeCoins />
-    </div>
-  );
+  return <Gallery3D />;
 };
 
 export default MemeCoinsPage;

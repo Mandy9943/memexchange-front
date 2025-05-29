@@ -8,8 +8,8 @@ export async function createAuthTokenCookie(token: string) {
   });
 }
 
-export const removeSession = () => {
-  cookies().delete('auth-token');
+export const removeSession = async () => {
+  (await cookies()).delete('auth-token');
 };
 
 export async function createCookie(
@@ -17,5 +17,5 @@ export async function createCookie(
   value: string,
   options?: Partial<ResponseCookie>
 ) {
-  cookies().set(key, value, options);
+  (await cookies()).set(key, value, options);
 }
