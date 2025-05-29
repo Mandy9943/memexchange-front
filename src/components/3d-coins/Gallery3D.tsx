@@ -7,13 +7,6 @@ import { toggleSidebar } from './actions';
 import './index.css';
 import PhotoViz from './PhotoViz';
 
-const searchPresets = [
-  'winter',
-  'mathematical concepts',
-  'underwater animals',
-  'circular shapes'
-];
-
 export default function Gallery3D() {
   return (
     <div className='h-full w-full fixed top-0 left-0 '>
