@@ -1,4 +1,4 @@
-import ToolsView from '@/app/tools/components/ToolsView';
+import ToolsView from '@/app/(MainLayout)/tools/components/ToolsView';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

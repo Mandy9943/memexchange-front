@@ -1,5 +1,5 @@
 'use client';
-import { PageHeaderHeading } from '@/app/tools/components/PageHeader/PageHeader';
+import { PageHeaderHeading } from '@/app/(MainLayout)/tools/components/PageHeader/PageHeader';
 import FormikContainer from './common/FormikContainer/FormikContainer';
 
 function XPaymentPageView() {

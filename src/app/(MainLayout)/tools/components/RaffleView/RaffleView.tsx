@@ -1,7 +1,7 @@
 import {
   PageHeaderDescription,
   PageHeaderHeading
-} from '@/app/tools/components/PageHeader/PageHeader';
+} from '@/app/(MainLayout)/tools/components/PageHeader/PageHeader';
 import SelectWinners from './common/SelectWinners/SelectWinners';
 
 const RaffleView = () => {

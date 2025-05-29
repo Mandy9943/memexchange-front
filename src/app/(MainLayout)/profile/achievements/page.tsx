@@ -1,6 +1,6 @@
 'use client';
 
-import ActionCard from '@/app/components/ActionCard';
+import ActionCard from '@/app/(MainLayout)/components/ActionCard';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { rewardService } from '@/services/rest/backendApi/reward';

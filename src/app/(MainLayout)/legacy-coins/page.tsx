@@ -1,5 +1,5 @@
 'use client';
-import MemeCoins from '../meme-coins/components/MemeCoins/MemeCoins';
+import MemeCoins from '../../meme-coins/components/MemeCoins/MemeCoins';
 
 const LegacyCoins = () => {
   return <MemeCoins />;

@@ -1,7 +1,7 @@
 import {
   PageHeaderDescription,
   PageHeaderHeading
-} from '@/app/tools/components/PageHeader/PageHeader';
+} from '@/app/(MainLayout)/tools/components/PageHeader/PageHeader';
 import HeroTagFqa from './common/FQA/HeroTagFqa';
 import HeroTagForm from './common/HeroTagForm/HeroTagForm';
 

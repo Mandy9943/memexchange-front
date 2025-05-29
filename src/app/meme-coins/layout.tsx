@@ -1,5 +1,5 @@
 import { ourFileRouter } from '@/app/api/uploadthing/core';
-import { Layout } from '@/components/Layout';
+import { MemeCoinNavSidebar } from '@/components/Layout/MemeCoinNavSidebar';
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -8,8 +8,8 @@ import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { extractRouterConfig } from 'uploadthing/server';
-import '../styles/globals.css';
-import App from './index';
+import App from '../(MainLayout)/index';
+import '../../styles/globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -97,7 +97,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <App>
           <Suspense>
-            <Layout>{children}</Layout>
+            <main>
+              <MemeCoinNavSidebar />
+              {children}
+            </main>
             <Toaster position='top-right' />
           </Suspense>
         </App>

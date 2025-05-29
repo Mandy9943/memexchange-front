@@ -1,7 +1,7 @@
 import {
   PageHeaderDescription,
   PageHeaderHeading
-} from '@/app/tools/components/PageHeader/PageHeader';
+} from '@/app/(MainLayout)/tools/components/PageHeader/PageHeader';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { RouteNamesEnum } from '@/localConstants';

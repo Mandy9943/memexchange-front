@@ -1,4 +1,4 @@
-import RaffleView from '@/app/tools/components/RaffleView/RaffleView';
+import RaffleView from '@/app/(MainLayout)/tools/components/RaffleView/RaffleView';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
