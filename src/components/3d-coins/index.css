@@ -24,6 +24,7 @@
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
   transform: translateX(100%);
+  z-index: 167322640;
 }
 .sidebar.open {
   transform: translateX(0);

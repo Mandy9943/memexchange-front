@@ -4,7 +4,8 @@ import { Coins, Hammer, Home, PlusCircle, Trophy } from 'lucide-react';
 
 interface RouteWithTitleType extends Omit<RouteType, 'component'> {
   title: string;
-  icon: React.ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon: any;
   description?: string;
 }
 
@@ -38,6 +39,11 @@ export const routes: RouteWithTitleType[] = [
   {
     path: RouteNamesEnum.memeCoins,
     title: 'Meme coins',
+    icon: Coins
+  },
+  {
+    path: RouteNamesEnum.legacyCoins,
+    title: 'Legacy coins',
     icon: Coins
   },
   {

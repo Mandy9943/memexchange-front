@@ -19,6 +19,9 @@ interface Image {
   id: string;
   description: string;
   url?: string;
+  name?: string;
+  bondingAddress?: string;
+  bondingState?: string;
 }
 
 function SceneContent() {
@@ -34,6 +37,8 @@ function SceneContent() {
   const targetImage = useStore.use.targetImage();
   const xRayMode = useStore.use.xRayMode();
   const resetCam = useStore.use.resetCam();
+  const searchResults = useStore.use.searchResults();
+  const isSearchActive = useStore.use.isSearchActive();
   const { camera } = useThree();
   const groupRef = useRef<Group>(null);
   const controlsRef = useRef<any>(null!);
@@ -41,7 +46,7 @@ function SceneContent() {
   const inactivityTimerRef = useRef<number | null>(null);
   const rotationVelocityRef = useRef(0);
 
-  const cameraDistance = 15;
+  const cameraDistance = 25;
   const targetSpeed = 0.1;
   const acceleration = 0.5;
 
@@ -340,6 +345,9 @@ function SceneContent() {
       <group ref={groupRef}>
         {images?.map((image) => {
           const isHighlighted = highlightNodes?.includes(image.id);
+          const isSearchResult =
+            isSearchActive &&
+            searchResults?.some((result) => result.id === image.id);
 
           return (
             <PhotoNode
@@ -347,6 +355,10 @@ function SceneContent() {
               id={image.id}
               imageUrl={image.url ?? `${storageRoot}${image.id}`}
               description={image.description}
+              name={image.name}
+              bondingAddress={image.bondingAddress}
+              bondingState={image.bondingState}
+              isSearchResult={isSearchResult}
               x={(nodePositions?.[image.id]?.[0] ?? 0) - 0.5}
               y={(nodePositions?.[image.id]?.[1] ?? 0) - 0.5}
               z={(nodePositions?.[image.id]?.[2] ?? 0) - 0.5}

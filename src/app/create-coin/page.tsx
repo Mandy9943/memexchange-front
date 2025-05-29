@@ -23,7 +23,7 @@ import { useTrackTransactionStatus } from '@multiversx/sdk-dapp/hooks';
 import { saveAs } from 'file-saver';
 import Cookies from 'js-cookie';
 import JSZip from 'jszip';
-import { Download, Loader2 } from 'lucide-react';
+import { BotIcon, Download, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
@@ -324,20 +324,14 @@ const Page = () => {
             after:bg-gradient-to-b after:from-green-500/0 after:via-green-500/10 after:to-green-500/0
             after:animate-glow-vertical'
           >
-            <span
-              className='text-xl group-hover:scale-110 transition-transform duration-300 
-              animate-float'
-            >
-              🤖
+            <span className='text-xl group-hover:scale-110 transition-transform duration-300 animate-float'>
+              <BotIcon />
             </span>
             <span className='font-medium relative z-10'>AI Coin Generator</span>
             <span className='text-xs opacity-75 border-l border-green-500/20 pl-2.5 ml-1 relative z-10'>
               {remainingGenerations ?? '...'} left
             </span>
-            <div
-              className='absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent 
-            transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000'
-            />
+            <div className='absolute inset-0 bg-gradient-to-r from-transparent via-green-500/5 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000' />
           </Button>
         </RequireAuth>
       </div>

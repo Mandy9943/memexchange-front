@@ -3,12 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import c from 'clsx';
+import { XIcon } from 'lucide-react';
+import Image from 'next/image';
 import { setSidebarOpen, setTargetImage } from './actions';
 import useStore from './store';
 
-interface Image {
+interface IImage {
   id: string;
   description: string;
+  url: string;
 }
 
 const truncateDescription = (description: string, wordLimit = 7) => {
@@ -23,9 +26,8 @@ const truncateDescription = (description: string, wordLimit = 7) => {
 };
 
 const Sidebar = () => {
-  const images = useStore.use.images() as Image[] | null;
+  const images = useStore.use.images() as IImage[] | null;
   const isSidebarOpen = useStore.use.isSidebarOpen();
-  console.log(isSidebarOpen);
 
   return (
     <aside className={c('sidebar', { open: isSidebarOpen })}>
@@ -34,16 +36,18 @@ const Sidebar = () => {
         onClick={() => setSidebarOpen(false)}
         aria-label='Close sidebar'
       >
-        <span className='icon'>close</span>
+        <XIcon className='w-4 h-4' />
       </button>
 
       <ul>
         {images?.map((image) => (
           <li key={image.id} onClick={() => setTargetImage(image.id)}>
-            <img
-              src={`https://www.gstatic.com/aistudio/starter-apps/photosphere/${image.id}`}
+            <Image
+              src={image.url}
               alt={truncateDescription(image.description, 3)}
               className='thumbnail'
+              width={50}
+              height={50}
             />
             <p>{image.description}</p>
           </li>

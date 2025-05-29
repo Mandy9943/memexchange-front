@@ -8,7 +8,7 @@ import { immer } from 'zustand/middleware/immer';
 
 interface StoreState {
   didInit: boolean;
-  images: any[] | null;
+  images: any[] | null; // Should ideally be an array of objects with id, url, description, name, etc.
   layout: string;
   layouts: Record<string, any> | null;
   nodePositions: Record<string, number[]> | null;
@@ -19,6 +19,11 @@ interface StoreState {
   targetImage: string | null;
   caption: string | null;
   resetCam: boolean;
+  // Search-related state
+  searchQuery: string;
+  searchResults: any[] | null;
+  isSearchActive: boolean;
+  searchType: 'all' | 'name' | 'address';
 }
 
 export default createSelectorFunctions(
@@ -35,7 +40,12 @@ export default createSelectorFunctions(
       xRayMode: false,
       targetImage: null,
       caption: null,
-      resetCam: false
+      resetCam: false,
+      // Search defaults
+      searchQuery: '',
+      searchResults: null,
+      isSearchActive: false,
+      searchType: 'all'
     }))
   )
 );

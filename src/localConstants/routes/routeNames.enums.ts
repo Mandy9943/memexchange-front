@@ -11,5 +11,6 @@ export enum RouteNamesEnum {
   xfees = '/tools/x-fees',
   xstkRewards = '/tools/staking-providers-rewards',
   xpayments = '/tools/x-payments',
-  raffle = '/tools/raffle'
+  raffle = '/tools/raffle',
+  legacyCoins = '/legacy-coins'
 }

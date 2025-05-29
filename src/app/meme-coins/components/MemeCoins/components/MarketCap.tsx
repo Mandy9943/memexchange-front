@@ -14,9 +14,9 @@ const MarketCap = ({ bondingAddress }: { bondingAddress: string }) => {
 
   if (isLoading) {
     return (
-      <p className='text-xs text-green-500 '>
+      <div className='text-xs text-green-500 '>
         <div className='animate-pulse bg-gray-400 rounded px-2 w-20 h-3'></div>
-      </p>
+      </div>
     );
   }
   return (
