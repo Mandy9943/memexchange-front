@@ -71,7 +71,8 @@ export const decodeToken = async (
 };
 
 export const getSession = async (): Promise<NativeAuthDecoded | null> => {
-  const authTokenCookie = cookies().get('auth-token');
+  const cookiesInstance = await cookies();
+  const authTokenCookie = cookiesInstance.get('auth-token');
 
   if (!authTokenCookie?.value) {
     return null;
@@ -87,6 +88,7 @@ export const getSession = async (): Promise<NativeAuthDecoded | null> => {
   return decodeToken(authTokenCookie.value);
 };
 
-export const removeSession = () => {
-  cookies().delete('auth-token');
+export const removeSession = async () => {
+  const cookiesInstance = await cookies();
+  cookiesInstance.delete('auth-token');
 };

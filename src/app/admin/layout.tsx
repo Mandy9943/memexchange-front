@@ -10,7 +10,8 @@ export default async function AdminRootLayout({
   children: ReactNode;
 }) {
   try {
-    const authToken = cookies().get('auth-token');
+    const cookiesInstance = await cookies();
+    const authToken = cookiesInstance.get('auth-token');
 
     if (!authToken) {
       return redirect('/');
