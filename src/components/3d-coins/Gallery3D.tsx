@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from 'react';
 import SearchBar from './SearchBar';
 import Sidebar from './Sidebar';
 
@@ -16,16 +15,6 @@ const searchPresets = [
 ];
 
 export default function Gallery3D() {
-  useEffect(() => {
-    const interval = setInterval(
-      () =>
-        setSearchPresetIdx((n) => (n === searchPresets.length - 1 ? 0 : n + 1)),
-      5000
-    );
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className='h-full w-full fixed top-0 left-0 '>
       <PhotoViz />
