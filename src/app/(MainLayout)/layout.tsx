@@ -95,12 +95,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <App>
-          <Suspense>
+        <Suspense>
+          <App>
             <Layout>{children}</Layout>
             <Toaster position='top-right' />
-          </Suspense>
-        </App>
+          </App>
+        </Suspense>
       </body>
     </html>
   );
