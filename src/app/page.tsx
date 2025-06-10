@@ -28,7 +28,7 @@ export default function LandingPage() {
               >
                 xExchange
               </a>
-              . Zero presale, zero team allocation, 100% community-driven.
+              Zero presale, zero team allocation, 100% community-driven.
             </p>
             <div className='flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto'>
               <Link
